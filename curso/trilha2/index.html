@@ -3,27 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trilha 2 — Técnicas (em breve) | Prompt Director</title>
+  <title>Trilha 2 — Técnicas | Prompt Director</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    .topic-explanation{display:none;} .topic-explanation.active{display:block;}
     html:not(.dark) body{background-color:#f8fafc;}
     html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
     html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
-    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;} html:not(.dark) .text-neutral-400{color:#6b7280;}
-    html:not(.dark) .border-dark-600{border-color:#d1d5db;}
-    html:not(.dark) .text-blue-400{color:#2563eb;} html:not(.dark) .bg-blue-500\/20{background-color:rgba(37,99,235,.12);} html:not(.dark) .bg-blue-500\/10{background-color:rgba(37,99,235,.08);} html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25);}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;} html:not(.dark) .border-dark-700{border-color:#e5e7eb;}
+    html:not(.dark) .text-blue-400{color:#2563eb;}
+    html:not(.dark) .bg-blue-500\/20{background-color:rgba(37,99,235,.12);}
+    html:not(.dark) .bg-blue-500\/10{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25);}
+    html:not(.dark) .hover\:bg-blue-500\/30:hover{background-color:rgba(37,99,235,.18);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:border-blue-500\/30:hover{border-color:rgba(37,99,235,.25);}
     html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
     html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
     html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
     html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
     html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
     html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
+
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
       <div class="flex items-center space-x-4">
@@ -36,25 +46,405 @@
         <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
         <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
         <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
       </div>
     </div></div>
   </nav>
-  <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-    <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-6">TRILHA 2 · EM BREVE</span>
-    <h1 class="text-4xl sm:text-5xl font-bold mb-6">🔵 Técnicas</h1>
-    <p class="text-lg text-neutral-400 mb-8">Parâmetros e sintaxe específicos de cada gerador, controle de composição e movimento em vídeo. Esta trilha está em produção — chega logo após a validação da Trilha 1.</p>
-    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-8 text-left">
-      <h3 class="font-semibold text-blue-400 mb-3">O que vai ter aqui</h3>
-      <ul class="text-neutral-300 text-sm space-y-2">
-        <li>• <strong>2.1</strong> Parâmetros e sintaxe (Midjourney v7, Sora 2, Veo 3, Runway Gen-4, Flux, Seedance 2, Kling 2.5, Nano Banana, Ideogram 3)</li>
-        <li>• <strong>2.2</strong> Controle de composição (image-to-image, ControlNet, character consistency, multi-prompt)</li>
-        <li>• <strong>2.3</strong> Movimento e câmera em vídeo (dolly, pan, tilt, keyframes, loops perfeitos)</li>
-        <li>• <strong>2.4</strong> Exercícios práticos</li>
-        <li>• <strong>2.5</strong> Passo-a-passo: clip de 10 segundos do zero</li>
-      </ul>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔵 Técnicas</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">A engenharia por trás do prompt. Sintaxe, parâmetros, controle de composição e movimento em vídeo. Aqui você sai do "escrevi e gerei" para "controlei e entreguei".</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">5</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">30</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~5h</div><div class="text-xs text-neutral-400">Duração</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Médio</div><div class="text-xs text-neutral-400">Nível</div></div>
+      </div>
     </div>
-    <a href="../trilha1/index.html" class="inline-block px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">Começar pela Trilha 1 →</a>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="#modulo-2-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~60 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">⚙️ Parâmetros e sintaxe</h3>
+          <p class="text-xs text-neutral-400">MJ, Sora, Veo, Runway, Flux, Seedance, Kling, Nano Banana</p>
+        </a>
+        <a href="#modulo-2-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~55 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🧰 Controle de composição</h3>
+          <p class="text-xs text-neutral-400">i2i, ControlNet, char consistency, inpaint, upscale</p>
+        </a>
+        <a href="#modulo-2-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.3</span><span class="text-xs text-neutral-500">~55 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🎥 Movimento e câmera em vídeo</h3>
+          <p class="text-xs text-neutral-400">Verbos de câmera, keyframes, slow-mo, loops</p>
+        </a>
+        <a href="#modulo-2-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.4</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🏋️ Exercícios práticos</h3>
+          <p class="text-xs text-neutral-400">6 desafios em ferramentas diferentes</p>
+        </a>
+        <a href="#modulo-2-5" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.5</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🗺️ Passo-a-passo: clip de 10s</h3>
+          <p class="text-xs text-neutral-400">Do storyboard ao MP4 entregue</p>
+        </a>
+      </div>
+    </section>
+
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-2">Conteúdo detalhado</h2>
+      <p class="text-neutral-400">Clique nos tópicos para abrir o resumo.</p>
+    </div>
+
+    <!-- 2.1 -->
+    <div id="modulo-2-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~60 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">⚙️ Parâmetros e sintaxe</h3>
+        <p class="text-neutral-400 text-sm">Cada gerador fala um dialeto. Aqui você aprende o vocabulário técnico das 9 ferramentas mais relevantes em maio/2026.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">🎨</span><div><span class="font-medium">Midjourney v7</span><span class="text-neutral-500 text-sm ml-2">- --ar, --s, --chaos, --sref, --cref</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A ferramenta com sintaxe mais densa de parâmetros: --ar (proporção), --s (stylize), --chaos (variação), --sref (style reference), --cref (character reference), --no (negative), --weird.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">MJ continua referência estética em 2026. Quem domina sref/cref consegue séries coerentes que outros geradores ainda lutam pra entregar.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">--ar 21:9 (cinema) · --s 750 (estilo médio) · --chaos 0-30 · --sref [URL] [URL] · --cref [URL] --cw 100.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">🎬</span><div><span class="font-medium">Sora 2 (OpenAI)</span><span class="text-neutral-500 text-sm ml-2">- vídeo longo com áudio nativo</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Modelo OpenAI focado em clipes de 10-20s com áudio gerado junto. Prompt em linguagem natural, sem parâmetros simbólicos — descrição cinematográfica direta.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Em 2026 é a referência para clipes narrativos com som ambiente sincronizado. Não dá pra mais entregar vídeo sem áudio diegético quando essa ferramenta existe.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Prompt descritivo cinematográfico · "with diegetic sound of [...]" · referência por imagem de partida · controle de câmera em linguagem natural.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">📹</span><div><span class="font-medium">Veo 3 (Google)</span><span class="text-neutral-500 text-sm ml-2">- vídeo cinematográfico premium</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Modelo Google focado em fotorrealismo cinematográfico e controle de câmera muito preciso. Aceita first-frame, last-frame e câmera path detalhado.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Continua sendo a ferramenta mais "cinema" pra planos paisagem, drone, beauty product. Quando o cliente pede "parece comercial de carro", Veo entrega.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Camera path explícito · "shot on Arri Alexa, anamorphic" · first/last frame com imagens · seed para iterar.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">🎞️</span><div><span class="font-medium">Runway Gen-4</span><span class="text-neutral-500 text-sm ml-2">- referência + controle preciso</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Plataforma com modelo Gen-4 (vídeo) + Frames (still). Forte em "references" — você sobe imagens de personagem/locação/estilo e o modelo respeita.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a ferramenta mais usada em produção comercial real porque tem timeline, ACT (animação de pessoas reais), e API estável.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">References (até 3) · ACT One para captura de performance · prompt curto + reference forte · motion brush.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">⚡</span><div><span class="font-medium">Flux 1.1 Pro + Kontext</span><span class="text-neutral-500 text-sm ml-2">- texto fiel e edição</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Família Black Forest Labs. Flux 1.1 Pro gera imagens com texto legível (placas, cardápios). Flux Kontext é a versão de edição (modifica imagem existente seguindo descrição).</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Quando o prompt tem texto que precisa sair certo (ex: cartaz, embalagem), Flux é mais confiável que MJ. Kontext substitui Photoshop pra edits descritivos.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Prompt longo descritivo · texto entre aspas duplas · Kontext: "change the X to Y while keeping everything else identical".</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">🍌</span><div><span class="font-medium">Nano Banana (Gemini Image)</span><span class="text-neutral-500 text-sm ml-2">- edição conversacional</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Editor de imagem do Gemini. Você manda imagem + instrução em linguagem natural ("troque a parede por tijolo aparente, mantenha o resto") e ele edita.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mais rápido que Photoshop pra edição descritiva. Estabilidade do sujeito muito boa entre edições — você itera várias vezes sem perder o personagem.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Instrução conversacional · pode tomar múltiplas imagens como entrada · "compose A with B" pra fusão.</p></div>
+        </div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-1.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- 2.2 -->
+    <div id="modulo-2-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~55 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🧰 Controle de composição</h3>
+        <p class="text-neutral-400 text-sm">Image-to-image, inpainting, ControlNet, character consistency e upscale. Quando texto sozinho não basta.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">🖼️</span><div><span class="font-medium">Image-to-image e style reference</span><span class="text-neutral-500 text-sm ml-2">- usar imagem como prompt</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Forneça uma imagem como ponto de partida ou referência de estilo. O modelo usa composição, cor ou estilo dela como guia.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a maneira mais rápida de garantir coerência visual entre múltiplas gerações sem escrever um prompt de 300 caracteres toda vez.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">MJ --sref · Runway "style reference" · Flux Redux · Nano Banana multi-imagem · força/peso da referência.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">🎨</span><div><span class="font-medium">Inpainting e outpainting</span><span class="text-neutral-500 text-sm ml-2">- edição cirúrgica</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Inpainting: editar uma área selecionada mantendo o resto. Outpainting: expandir a imagem além das bordas originais.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Resolve 80% dos problemas pequenos sem regenerar tudo. "Mãos erradas" deixaram de ser problema com inpaint preciso.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Máscara · prompt da área · respeitar contexto · zoom out para outpaint · feather na borda da máscara.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">🦴</span><div><span class="font-medium">ControlNet (pose, depth, canny)</span><span class="text-neutral-500 text-sm ml-2">- forçar geometria</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Família de controladores que força o modelo a respeitar uma geometria: pose humana, mapa de profundidade, contorno (canny), linhas (lineart).</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Quando o cliente quer "a mesma pose, outra pessoa, outro cenário". Sem ControlNet, isso é loteria.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">OpenPose · depth map · canny edges · lineart · disponível em Stable Diffusion / Flux com plugins.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">👤</span><div><span class="font-medium">Character consistency</span><span class="text-neutral-500 text-sm ml-2">- mesma pessoa em 20 cenas</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Manter a aparência de um personagem entre múltiplas imagens/clipes. Em 2026: MJ --cref, Runway character refs, Nano Banana multi-imagem, IP-Adapter no Flux.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o requisito que separa um still de IA de uma campanha. Sem consistência, não tem mascote, não tem série, não tem narrativa.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Imagem-base de qualidade · 3-5 ângulos do personagem · peso 80-100 · iterar do mesmo seed.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">🧪</span><div><span class="font-medium">Multi-prompt e blends</span><span class="text-neutral-500 text-sm ml-2">- pesos relativos</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dividir o prompt em partes com pesos. Em MJ: "subject A ::2 setting B ::1". Em SD: "(subject:1.4) (setting:0.8)".</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Quando um elemento do prompt está sendo ignorado, em vez de gritar mais, você sobe o peso. Resolve "modelo não está pintando a chuva" com cirurgia.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sintaxe varia por ferramenta · peso 1.0-2.0 raramente > 2 · pesos negativos para suprimir.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">🔍</span><div><span class="font-medium">Upscale e enhance</span><span class="text-neutral-500 text-sm ml-2">- entregar em 4K sem perder estilo</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Subir a resolução de uma imagem mantendo o estilo. Topaz Gigapixel, Magnific, Krea Enhance, Upscaler do MJ.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cliente pede 4K. Modelo entrega 1024px. Sem upscale bom, sua entrega tem resolução de avatar de Twitter.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cuidado com upscale "criativo" que muda o sujeito · Topaz para fidelidade, Magnific para detalhe extra · prompt no upscale.</p></div>
+        </div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-2.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- 2.3 -->
+    <div id="modulo-2-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.3</span><span class="text-xs text-neutral-500">~55 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🎥 Movimento e câmera em vídeo</h3>
+        <p class="text-neutral-400 text-sm">Verbos de câmera que o modelo entende, movimento do sujeito vs câmera, keyframing e loops perfeitos.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">📹</span><div><span class="font-medium">Verbos de câmera</span><span class="text-neutral-500 text-sm ml-2">- dolly, pan, tilt, crane, tracking</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Termos técnicos de cinema que os modelos foram treinados a reconhecer: dolly in/out, pan left/right, tilt up/down, crane shot, tracking shot, push-in.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">"The camera moves" não diz nada. "Slow dolly in toward the subject" diz tudo. Dialetos técnicos > descritivos.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sempre adjetivo + verbo + alvo: "slow dolly in to the actor's face" não só "dolly in".</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">🏃</span><div><span class="font-medium">Movimento do sujeito vs câmera</span><span class="text-neutral-500 text-sm ml-2">- separe os dois eixos</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Distinguir explicitamente: "subject walks forward" + "camera stays still" OU "subject is still" + "camera dollies out". A confusão dos dois gera vídeo errado.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o erro #1 de quem começa em vídeo IA. "A girl running" pode virar câmera correndo + garota parada.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sempre nomear os 2 eixos · "static camera" se a câmera não move · "subject motionless" se o sujeito não move.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">⏱️</span><div><span class="font-medium">Slow-mo, time-lapse, ramping</span><span class="text-neutral-500 text-sm ml-2">- controle de tempo</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Slow motion = movimento lento dramático. Time-lapse = aceleração. Speed ramp = transição entre velocidades dentro do mesmo clipe.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Em comercial e clipe musical, controle de tempo é metade do impacto visual. Saber o nome certo entrega o efeito.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">"shot in slow motion, 240fps look" · "time-lapse, clouds moving fast" · "speed ramp from real-time to slow-mo".</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">🎯</span><div><span class="font-medium">First frame / last frame</span><span class="text-neutral-500 text-sm ml-2">- keyframing por imagem</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Fornecer a imagem do primeiro frame E do último frame; o modelo interpola o movimento entre os dois. Disponível em Runway, Veo, Kling.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a forma mais precisa de controlar o que acontece. Você escolhe os pontos exatos de início/fim — o modelo só preenche o meio.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Frames muito diferentes geram morphing estranho · frames próximos geram movimento sutil convincente · pode combinar com prompt para guiar.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">🔗</span><div><span class="font-medium">Continuidade entre clipes</span><span class="text-neutral-500 text-sm ml-2">- emendar planos em sequência</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Usar o último frame de um clipe como first-frame do próximo. Garante zero salto de personagem, luz e enquadramento.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É como você monta uma cena de 30s com clipes de 5s sem que o espectador veja a costura.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Extract last frame → upload as first frame → novo prompt · refinar luz se a iluminação se desvia.</p></div>
+        </div></div></div>
+
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">♾️</span><div><span class="font-medium">Loops perfeitos</span><span class="text-neutral-500 text-sm ml-2">- Seedance 2, background ininterrupto</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Vídeo que termina exatamente onde começa, sem salto perceptível. Seedance 2 é a ferramenta especializada; truque comum: first frame = last frame.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Background loops para sites, displays em loja, projeções de evento — tudo precisa loop perfeito.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cena de circulação contínua (água, fumaça, ondas, partículas) · evitar elementos pontuais (relógio batendo) · Seedance prompt = mood + ação cíclica.</p></div>
+        </div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-3.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- 2.4 -->
+    <div id="modulo-2-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.4</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🏋️ Exercícios práticos</h3>
+        <p class="text-neutral-400 text-sm">6 desafios que forçam você a usar cada ferramenta para o que ela é melhor.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">🎨</span><div><span class="font-medium">D1 — Mesma cena em 4 ferramentas</span><span class="text-neutral-500 text-sm ml-2">- MJ, Flux, Ideogram, Nano Banana</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Pegue o prompt-régua que você criou na T1 e gere em 4 ferramentas diferentes. Compare lado a lado.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada ferramenta tem viés. Descobrir empiricamente vale mais que ler benchmark.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Critério de feito: você consegue dizer qual ferramenta é melhor para 3 cenários diferentes (retrato, paisagem, produto).</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">📝</span><div><span class="font-medium">D2 — Texto em imagem</span><span class="text-neutral-500 text-sm ml-2">- Flux/Ideogram para placa real</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gere um cartaz de cinema com título "ÚLTIMO TREM PARA SANTOS" legível, sem typos. Use Flux ou Ideogram 3.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Texto em imagem era o calcanhar de Aquiles da IA. Agora é resolvido — mas só com ferramentas certas.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Texto entre aspas · família tipográfica explícita · evitar texto longo (10+ palavras ainda erra).</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">👥</span><div><span class="font-medium">D3 — Personagem em 5 cenários</span><span class="text-neutral-500 text-sm ml-2">- MJ --cref ou Runway refs</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Crie um personagem (foto-base) e gere essa pessoa em 5 cenários: cozinha, praia, escritório, floresta, ônibus.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o teste real de consistency. Se o personagem muda de rosto, sua referência está fraca ou cenário forte demais.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Foto-base nítida e frontal · descrever roupa em cada prompt · peso de referência alto (--cw 100).</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">🎥</span><div><span class="font-medium">D4 — Clipe de câmera dirigida</span><span class="text-neutral-500 text-sm ml-2">- dolly + tracking em Veo/Sora</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gere 5s onde a câmera faz "slow dolly in" enquanto o sujeito permanece imóvel. Depois 5s com "tracking shot" lateral do sujeito andando.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Treina sua habilidade de pedir câmera específica. Se o modelo "interpreta", você não dirigiu — só sugeriu.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Camera path + subject motion separados · velocidade explícita · "static subject" para garantir.</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">♾️</span><div><span class="font-medium">D5 — Loop de 6s para site</span><span class="text-neutral-500 text-sm ml-2">- Seedance 2</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Crie um loop seamless de 6s pra background de hero de site: tema livre, cena de circulação contínua.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Critério profissional: passa de cabeça pra ninguém ver o "ponto da emenda".</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Movimento cíclico · sem eventos pontuais · paleta consistente · testar replay 5x sem perceber a costura.</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">🛠️</span><div><span class="font-medium">D6 — Edição cirúrgica</span><span class="text-neutral-500 text-sm ml-2">- Nano Banana / Flux Kontext</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Pegue uma imagem que você gerou e faça 5 edits sequenciais sem perder o sujeito: roupa, fundo, hora do dia, expressão, objeto em mão.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o workflow do dia-a-dia em produção. Cliente sempre quer "isso mesmo, só muda X".</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">"Change X while keeping everything else identical" · um edit por vez · salvar versões.</p></div>
+        </div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-4.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- 2.5 -->
+    <div id="modulo-2-5" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.5</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🗺️ Passo-a-passo: clip de 10 segundos</h3>
+        <p class="text-neutral-400 text-sm">Do storyboard ao MP4 entregue. Aplica tudo da T2 em um projeto único.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">🎯</span><div><span class="font-medium">Passo 1 — Briefing e shot list</span><span class="text-neutral-500 text-sm ml-2">- 2 planos × 5 segundos</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Briefing: "Abertura de um podcast sobre cidade. 10s. Skyline + transição para entrevistada em estúdio." Quebrar em 2 shots.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Em 2026 ainda é mais barato e melhor fazer 2 clipes de 5s do que 1 clipe de 10s — a coerência cai com a duração.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Shot 1: drone aéreo da cidade ao amanhecer · Shot 2: entrevistada sentando no estúdio · ponto de cut: luz.</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">🖼️</span><div><span class="font-medium">Passo 2 — Stills de referência</span><span class="text-neutral-500 text-sm ml-2">- gerar a "primeira imagem" de cada plano</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gerar em MJ ou Flux o primeiro frame de cada shot. Iterar até estar bom como foto.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É 10x mais barato refinar still do que vídeo. Resolver a composição em imagem e só depois animar.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">2 imagens base · idêntica paleta · idêntica hora do dia · mesma referência de filme.</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">🎬</span><div><span class="font-medium">Passo 3 — Animar shot 1 (drone)</span><span class="text-neutral-500 text-sm ml-2">- Veo 3 ou Sora 2</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Subir a imagem-base como first frame. Prompt: "slow drone push forward over the skyline at sunrise, golden light, atmospheric haze". Veo entrega o melhor aéreo.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Aéreo é onde Veo brilha mais que outras opções. Escolha de ferramenta importa por tipo de plano.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Câmera lenta · uma direção só · 5s exatos · áudio ambiente sutil de cidade despertando.</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">🎤</span><div><span class="font-medium">Passo 4 — Animar shot 2 (estúdio)</span><span class="text-neutral-500 text-sm ml-2">- Runway Gen-4 com character ref</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Runway com character reference da entrevistada (3 fotos da pessoa). Prompt: "she sits down, adjusts the microphone, looks slightly off-camera, soft natural movement". 5s.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Quando tem pessoa real, Runway com refs é a melhor opção pra preservar identidade.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Movimento sutil · sujeito não fala (mais difícil) · áudio ambiente de estúdio.</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">✂️</span><div><span class="font-medium">Passo 5 — Editar e adicionar som</span><span class="text-neutral-500 text-sm ml-2">- DaVinci/CapCut + ElevenLabs</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Montar os 2 clipes em um editor (DaVinci Resolve free ou CapCut). Cross-fade de luz no cut. Música ambiente do ElevenLabs Music ou Suno.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">IA gera matéria-prima. Edição faz o produto. Não pular essa etapa.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cut motivado (luz, som, movimento) · áudio sobe e desce · final cleano.</p></div>
+        </div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">📦</span><div><span class="font-medium">Passo 6 — Upscale e exportar</span><span class="text-neutral-500 text-sm ml-2">- Topaz Video AI, H.264 1080p</span></div>
+        </button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+          <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Topaz Video AI para upscale 1080p limpo, exportar H.264 alto bitrate. Entregar arquivo único, com naming convention.</p></div>
+          <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entrega é parte do trabalho. Arquivo com nome misterioso de IA não fica em ata de reunião.</p></div>
+          <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Resolução padrão · bitrate alto · nome com data e versão · alt 9:16 para Reels.</p></div>
+        </div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-5.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="../trilha1/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha 1</a>
+      <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Trilha 3: Avançado →</a>
+    </div>
+
   </main>
+
   <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    function toggleTopic(b){const t=b.closest('.topic-item'),e=t.querySelector('.topic-explanation'),m=b.closest('.bg-dark-800');m.querySelectorAll('.topic-explanation.active').forEach(x=>{if(x!==e)x.classList.remove('active');});e.classList.toggle('active');}
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
 </body>
 </html>

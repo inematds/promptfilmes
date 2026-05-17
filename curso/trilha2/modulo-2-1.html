@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.1 Parâmetros e sintaxe | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;} html:not(.dark) .border-dark-700{border-color:#e5e7eb;}
+    html:not(.dark) .text-blue-400{color:#2563eb;}
+    html:not(.dark) .bg-blue-500\/20{background-color:rgba(37,99,235,.12);}
+    html:not(.dark) .bg-blue-500\/10{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);}
+    html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);} html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.1</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Parâmetros e sintaxe</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Cada gerador tem seu dialeto. Aqui você aprende a sintaxe técnica das 9 ferramentas mais relevantes em maio/2026 — com exemplo prático em cada uma.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">60</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Médio</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Técnico</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">🎨 Midjourney v7</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Continua sendo a referência estética em 2026. Dialeto simbólico (<code class="mono text-blue-400">--flag</code>) e biblioteca de sref/cref poderosa.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📋 Parâmetros essenciais</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <code class="mono text-blue-400">--ar 21:9</code> proporção (1:1, 4:5, 16:9, 21:9, 9:16)</li>
+          <li>• <code class="mono text-blue-400">--s 250</code> estilização (0-1000, default 100) — quanto maior, mais "MJ"</li>
+          <li>• <code class="mono text-blue-400">--chaos 25</code> variação entre 4 imagens (0-100)</li>
+          <li>• <code class="mono text-blue-400">--weird 250</code> esquisitice controlada (0-3000)</li>
+          <li>• <code class="mono text-blue-400">--sref [URL] [URL] --sw 100</code> estilo de referência (peso 0-1000)</li>
+          <li>• <code class="mono text-blue-400">--cref [URL] --cw 100</code> personagem de referência (peso 0-100)</li>
+          <li>• <code class="mono text-blue-400">--no text, watermark</code> negativos</li>
+          <li>• <code class="mono text-blue-400">--seed 12345</code> reprodutibilidade</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📋 Exemplo completo</h3>
+        <p class="text-neutral-400 text-sm mb-2">Retrato editorial cinematográfico com estilo de referência e proporção 4:5.</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-blue-400 overflow-x-auto"><code class="mono">editorial portrait of a Brazilian fisherman, weathered face, Kodak Portra 400, soft window light, 85mm shallow depth --ar 4:5 --s 250 --sref https://yourimage.com/style.jpg --sw 80 --no text, watermark, extra fingers</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">🎬 Sora 2 (OpenAI)</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Vídeo 10-20s com <strong class="text-blue-400">áudio diegético sincronizado</strong>. Em 2026 é a única ferramenta que entrega clipe com som ambiente integrado de fábrica.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📋 Padrão de prompt Sora</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• Prompt em linguagem natural cinematográfica (não bullet list)</li>
+          <li>• Câmera descrita em prosa: "<em>the camera slowly tracks beside her as she walks</em>"</li>
+          <li>• Áudio: "<em>with diegetic sound of [...]</em>" no final</li>
+          <li>• Reference image opcional como first frame</li>
+          <li>• Duração escolhida na interface (5/10/20s)</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📋 Exemplo</h3>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-blue-400 overflow-x-auto"><code class="mono">A young woman walks through a rainy Tokyo alley at night, neon signs reflecting on the wet pavement. The camera follows her from behind in a smooth tracking shot, slightly low angle. Shot on anamorphic lens, cinematic 2.39:1. Cinestill 800T film stock with characteristic orange halation. With diegetic sound of footsteps on wet concrete, distant traffic, and faint rain on a tin roof.</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">📹 Veo 3 (Google)</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A ferramenta mais <strong class="text-blue-400">"cinematográfica"</strong> em 2026, especialmente em aéreos, beauty product, paisagens.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📋 O que controlar em Veo</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• Câmera: "<em>shot on Arri Alexa with anamorphic lens, slow drone push forward</em>"</li>
+          <li>• First-frame e last-frame por upload (controle interpolação)</li>
+          <li>• Físico-real: chuva, fumaça e fluidos respondem realisticamente</li>
+          <li>• Áudio: gerar separado e sincronizar em edição</li>
+          <li>• Resolução: 1080p ou 4K (4K em conta enterprise)</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-blue-400 overflow-x-auto"><code class="mono">A pristine red sports car drives along a coastal highway at sunset. The camera flies alongside in a low aerial tracking shot, golden hour backlight, anamorphic lens flares across the windshield. Shot on Arri Alexa, cinematic color grade with warm highlights and teal shadows. 2.39:1, slow motion 60fps look.</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🎞️ Runway Gen-4 + ACT</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A ferramenta mais usada em produção comercial real. Forte em <strong class="text-blue-400">references</strong> e em ACT (captura de performance facial).</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📋 Especialidades</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong>References (até 3):</strong> personagem, locação, estilo. Peso ajustável.</li>
+          <li>• <strong>ACT One:</strong> grava sua face com webcam e transfere expressão pro personagem gerado.</li>
+          <li>• <strong>Motion Brush:</strong> pintar onde tem movimento e onde não tem.</li>
+          <li>• <strong>Timeline:</strong> editor interno pra concatenar clipes.</li>
+          <li>• <strong>API estável:</strong> usado em pipelines automatizados.</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <p class="text-neutral-400 text-sm mb-2">Workflow típico: 3 fotos do personagem → reference 1 (peso 100). 1 foto do cenário → reference 2 (peso 80). Style ref → reference 3 (peso 60). Prompt curto descritivo.</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-blue-400 overflow-x-auto"><code class="mono">[Refs: character(100), location(80), film_still(60)]
+Prompt: "she sits down at the table, takes a sip of coffee, looks out the window. Static camera, medium shot."</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">⚡ Flux 1.1 Pro + Kontext + Ideogram 3</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A "família texto-fiel": quando o prompt tem palavras que precisam sair legíveis (placa, cardápio, embalagem), essas são as ferramentas que entregam.</p>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6 text-sm">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">Flux 1.1 Pro (geração)</h4>
+          <ul class="space-y-1 text-neutral-300">
+            <li>• Prompt longo, descritivo, prosa</li>
+            <li>• Texto entre aspas duplas: <code class="mono text-blue-400">"OPEN"</code></li>
+            <li>• Realismo fotográfico forte</li>
+            <li>• Mãos e anatomia muito boas</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">Flux Kontext (edição)</h4>
+          <ul class="space-y-1 text-neutral-300">
+            <li>• Imagem + instrução de edit</li>
+            <li>• "Change X while keeping everything else identical"</li>
+            <li>• Mantém identidade do sujeito entre edits</li>
+            <li>• Ideal para variações de produto</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">Ideogram 3</h4>
+          <ul class="space-y-1 text-neutral-300">
+            <li>• Especialista em tipografia em imagem</li>
+            <li>• Pôster, capa de livro, cardápio</li>
+            <li>• "Magic Prompt" expande automaticamente</li>
+            <li>• Aspect ratio amplo</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">Quando usar cada</h4>
+          <ul class="space-y-1 text-neutral-300">
+            <li>• Texto 1-3 palavras → Flux ou Ideogram</li>
+            <li>• Texto editorial (4+ palavras) → Ideogram</li>
+            <li>• Editar produto/cena existente → Kontext</li>
+            <li>• Foto realista limpa → Flux 1.1 Pro</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">🍌 Nano Banana + Kling 2.5 + Seedance 2 + Luma Ray 2</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Os "especialistas". Cada uma tem um nicho onde supera as gigantes.</p>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6 text-sm">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">🍌 Nano Banana (Gemini Image)</h4>
+          <p class="text-neutral-300 mb-2">Edição conversacional com identidade preservada.</p>
+          <p class="text-neutral-400 text-xs">"<em>Show her wearing a green coat in the same pose, same lighting.</em>"</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">🎭 Kling 2.5</h4>
+          <p class="text-neutral-300 mb-2">Vídeo focado em movimento humano realista — dança, expressões, gesto.</p>
+          <p class="text-neutral-400 text-xs">Image-to-video com motion guidance.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">♾️ Seedance 2</h4>
+          <p class="text-neutral-300 mb-2">Loops perfeitos. Background de site, displays, projeções de evento.</p>
+          <p class="text-neutral-400 text-xs">Use sua skill <code class="mono">/seedance-loop-prompt</code>.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">🌊 Luma Ray 2</h4>
+          <p class="text-neutral-300 mb-2">Câmera 3D coerente. Quando precisa de movimento de câmera complexo respeitando geometria.</p>
+          <p class="text-neutral-400 text-xs">Trajetória de câmera explícita em prompt.</p>
+        </div>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-2 flex items-center"><span class="mr-2">💡</span>Regra de ouro de 2026</h3>
+        <p class="text-neutral-300 text-sm">Nenhuma ferramenta é "a melhor". Cada uma tem 1-2 nichos onde domina. O profissional de prompt sabe quando usar qual — não fica fiel a uma plataforma.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span>Resumo do módulo</h2>
+        <div class="space-y-3 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Midjourney v7</strong><span class="text-neutral-400"> — referência estética, sref/cref poderosos</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Sora 2</strong><span class="text-neutral-400"> — clipes com áudio diegético, prosa cinematográfica</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Veo 3</strong><span class="text-neutral-400"> — cinemática premium, aéreos, beauty product</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Runway Gen-4 + ACT</strong><span class="text-neutral-400"> — references e captura de performance</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Flux + Kontext + Ideogram</strong><span class="text-neutral-400"> — texto fiel, edição descritiva</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Especialistas</strong><span class="text-neutral-400"> — Nano Banana, Kling, Seedance, Luma para nichos</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-blue-400 mb-2">Próximo Módulo:</h3><p class="text-neutral-300">2.2 — Controle de composição (i2i, ControlNet, character consistency)</p></div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+          <a href="modulo-2-2.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.2 Storytelling em sequência | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;}
+    html:not(.dark) .text-purple-400{color:#7c3aed;} html:not(.dark) .bg-purple-500\/20{background-color:rgba(124,58,237,.12);}
+    html:not(.dark) .bg-purple-500\/10{background-color:rgba(124,58,237,.08);} html:not(.dark) .border-purple-500\/30{border-color:rgba(124,58,237,.25);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);} html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a><span>/</span>
+      <span class="text-purple-400">Módulo 3.2</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📖 Storytelling em sequência</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Como contar história em 5-10 imagens ou clipes em ordem. Storyboard, beats narrativos, match cut, transições motivadas e arco emocional.</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">📋 Storyboard com IA</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Antes de gerar 30s de vídeo (caro), gere <strong class="text-purple-400">6 stills</strong> que são o storyboard (barato). Aprovar o storyboard antes de animar economiza 90% das iterações.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Workflow</h3>
+        <ol class="text-sm text-neutral-300 space-y-2 list-decimal pl-4">
+          <li>Escrever shot list: cada shot = 1 imagem com descrição curta (3-5 palavras).</li>
+          <li>Gerar still 1 com o bloco-prompt da bíblia visual + descrição do shot 1.</li>
+          <li>Gerar still 2 usando still 1 como i2i (ou MJ Vary) → coerência herdada.</li>
+          <li>Repetir até ter 6 stills. Imprimir em grid 2×3.</li>
+          <li>Mostrar pro cliente. Iterar individualmente o que precisa antes de animar.</li>
+          <li>Só então: cada still vira first-frame de seu clipe.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">🎯 Beats narrativos</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Sequência de imagens lindas sem beat narrativo = montagem de stock. <strong class="text-purple-400">Beats</strong> dão sentido.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Estrutura clássica em 5 beats</h3>
+        <ol class="text-sm text-neutral-300 space-y-2 list-decimal pl-4">
+          <li><strong class="text-purple-400">Estabelecimento:</strong> apresenta lugar/tom. Wide shot.</li>
+          <li><strong class="text-purple-400">Introdução do sujeito:</strong> "quem é nosso protagonista". Medium shot.</li>
+          <li><strong class="text-purple-400">Ação/desejo:</strong> personagem faz algo. Tensão sobe.</li>
+          <li><strong class="text-purple-400">Clímax:</strong> momento de pico emocional. Close-up.</li>
+          <li><strong class="text-purple-400">Resolução/eco:</strong> respiração final. Wide ou close residual.</li>
+        </ol>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <p class="text-neutral-300 text-sm"><strong class="text-primary">Cada beat tem função clara.</strong> Se você não consegue responder "qual a função desse shot?", o shot está sobrando.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">✂️ Match cut e cut motivado</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed"><strong class="text-purple-400">Match cut:</strong> forma/composição idêntica entre fim de A e início de B (Kubrick: osso → satélite). <strong class="text-purple-400">Cut motivado:</strong> luz, som ou movimento "justifica" o corte.</p>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6 text-sm">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-purple-400 mb-2">Match cuts clássicos</h4>
+          <ul class="text-neutral-300 space-y-1">
+            <li>• Círculo (lua → roda → prato)</li>
+            <li>• Movimento (objeto cai → outro sobe)</li>
+            <li>• Olhar (alguém olha → o que ele vê)</li>
+            <li>• Cor (vermelho fim → vermelho começo)</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-purple-400 mb-2">Motivações de cut</h4>
+          <ul class="text-neutral-300 space-y-1">
+            <li>• Bater de porta (som)</li>
+            <li>• Flash de luz</li>
+            <li>• Movimento bruto (whip pan)</li>
+            <li>• Mudança de música</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <p class="text-neutral-400 text-sm">Em IA-vídeo, planejar o cut <em>antes</em> de gerar — assim você gera o último frame de A pensando em emendar com o primeiro frame de B.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🔁 Tipos de transição</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Cada transição comunica algo. Escolha consciente.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong class="text-purple-400">Cut seco:</strong> padrão; uso para continuidade direta</li>
+          <li>• <strong class="text-purple-400">Cross-fade / dissolve:</strong> tempo passando, sonho, memória</li>
+          <li>• <strong class="text-purple-400">Whip pan:</strong> urgência, mudança brusca, comédia</li>
+          <li>• <strong class="text-purple-400">J-cut:</strong> áudio do próximo entra antes da imagem; usado para criar expectativa</li>
+          <li>• <strong class="text-purple-400">L-cut:</strong> áudio anterior continua sobre a nova imagem; criar ressonância</li>
+          <li>• <strong class="text-purple-400">Morph cut:</strong> evolução interna; passagem de tempo curta</li>
+          <li>• <strong class="text-purple-400">Match cut:</strong> elegante; quando forma une os planos</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">🌗 Arco emocional (mood arc)</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Sequência sem arco vira tédio. Arco simples (calmo → tenso → liberado) já dá leitura.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Como mapear na prática</h3>
+        <ol class="text-sm text-neutral-300 space-y-2 list-decimal pl-4">
+          <li>Listar os 5-6 shots em ordem.</li>
+          <li>Atribuir <strong>nota emocional</strong> a cada (1-10).</li>
+          <li>Plotar curva. Deve subir, ter um pico, descer.</li>
+          <li>Se está linear, falta tensão. Adicionar um shot que sobe a temperatura antes do clímax.</li>
+          <li>Modular com <strong>luz/paleta</strong>: cores frias na calma, saturadas/contraste na tensão, quentes na resolução.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">🎞️ Edição: a sequência vira filme</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">IA gera matéria-prima. Edição faz produto. Pular essa etapa é entregar montagem de clipes, não cena.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Ferramentas em 2026</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong>DaVinci Resolve (gratuito):</strong> padrão profissional. Color page é o melhor do mercado.</li>
+          <li>• <strong>CapCut Desktop:</strong> rápido, social-first, AI features integradas (auto-captions, AI roto)</li>
+          <li>• <strong>Premiere Pro:</strong> ecossistema Adobe, plugins fortes</li>
+          <li>• <strong>FCP (Mac):</strong> rápido e estável, Magnetic Timeline ótimo pra montagem</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Checklist de finalização</h3>
+        <ul class="text-sm text-neutral-300 space-y-1">
+          <li>✓ Color match entre todos os clipes (Color Page)</li>
+          <li>✓ Áudio em camadas: ambiente / foley / música / diálogo</li>
+          <li>✓ Áudio nivelado (-14 LUFS web, -23 LUFS broadcast)</li>
+          <li>✓ Graphics overlay limpo (lower-thirds, títulos)</li>
+          <li>✓ Grão unificador leve por cima de tudo</li>
+          <li>✓ Vinheta sutil se cair bem com o look</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span>Resumo do módulo</h2>
+        <div class="space-y-3 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Storyboard antes de animar</strong><span class="text-neutral-400"> — iterar barato</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Beats com função clara</strong><span class="text-neutral-400"> — sem função, fora</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Match cut + motivado</strong><span class="text-neutral-400"> — costura invisível</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Transição comunica</strong><span class="text-neutral-400"> — escolher conscientemente</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Arco emocional</strong><span class="text-neutral-400"> — sobe, clímax, desce</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Edição é onde vira filme</strong><span class="text-neutral-400"> — não pular</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-purple-400 mb-2">Próximo Módulo:</h3><p class="text-neutral-300">3.3 — Pipeline híbrido (IA + foto real, AE, lipsync, finalização)</p></div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="modulo-3-3.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próximo módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

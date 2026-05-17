@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trilha 4 — Receitas (em breve) | Prompt Director</title>
+  <title>Trilha 4 — Receitas Prontas | Prompt Director</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,18 +12,26 @@
     html:not(.dark) body{background-color:#f8fafc;}
     html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
     html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
-    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;} html:not(.dark) .text-neutral-400{color:#6b7280;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
     html:not(.dark) .border-dark-600{border-color:#d1d5db;}
-    html:not(.dark) .text-amber-400{color:#92400e;} html:not(.dark) .bg-amber-500\/20{background-color:rgba(217,119,6,.12);} html:not(.dark) .bg-amber-500\/10{background-color:rgba(217,119,6,.08);} html:not(.dark) .border-amber-500\/30{border-color:rgba(217,119,6,.25);}
+    html:not(.dark) .text-amber-400{color:#92400e;}
+    html:not(.dark) .bg-amber-500\/20{background-color:rgba(217,119,6,.12);}
+    html:not(.dark) .bg-amber-500\/10{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) .border-amber-500\/30{border-color:rgba(217,119,6,.25);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) .hover\:border-amber-500\/30:hover{border-color:rgba(217,119,6,.25);}
     html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
     html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
     html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
     html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
     html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
     html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
+
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
       <div class="flex items-center space-x-4">
@@ -36,24 +44,91 @@
         <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
         <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
         <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
       </div>
     </div></div>
   </nav>
-  <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-    <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-6">TRILHA 4 · EM BREVE</span>
-    <h1 class="text-4xl sm:text-5xl font-bold mb-6">🟡 Receitas Prontas</h1>
-    <p class="text-lg text-neutral-400 mb-8">Biblioteca copy-paste de prompts para propaganda, cinema, animação e casos especiais. Em produção.</p>
-    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-8 text-left">
-      <h3 class="font-semibold text-amber-400 mb-3">O que vai ter aqui</h3>
-      <ul class="text-neutral-300 text-sm space-y-2">
-        <li>• <strong>4.1</strong> Propaganda e produto (fast food, beauty, tech, bebida, lifestyle)</li>
-        <li>• <strong>4.2</strong> Cinema e curta (noir, sci-fi, drama, thriller, faroeste, VHS)</li>
-        <li>• <strong>4.3</strong> Animação e desenho (Pixar, Ghibli, anime, motion graphics, claymation)</li>
-        <li>• <strong>4.4</strong> Casos especiais (Reels 9:16, capas, pôsteres, logo reveal, HQ, background loop)</li>
-      </ul>
+
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">TRILHA 4</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🟡 Receitas Prontas</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Biblioteca copy-paste. Cada tópico é um prompt completo pronto pra usar, com variações e dica de qual ferramenta entrega melhor pra ele em maio/2026.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">24</div><div class="text-xs text-neutral-400">Receitas</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">∞</div><div class="text-xs text-neutral-400">Variações</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Lib</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
     </div>
-    <a href="../trilha1/index.html" class="inline-block px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">Começar pela Trilha 1 →</a>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-12">
+      <h3 class="text-lg font-semibold text-primary mb-2 flex items-center"><span class="mr-2">📌</span>Como usar esta trilha</h3>
+      <p class="text-neutral-300 text-sm">Cada módulo é uma <strong>categoria</strong>; cada tópico é uma <strong>receita</strong> com prompt EN pronto + ferramenta recomendada + ideias de variação. Cola, ajusta o sujeito/marca, gera. Volte sempre — vai ser sua referência principal.</p>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">As 4 categorias</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <a href="modulo-4-1.html" class="group bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 hover:border-amber-400 transition-all">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-amber-400 bg-amber-500/20 px-2 py-1 rounded">4.1</span>
+            <span class="text-xs text-neutral-500">6 receitas</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-2 group-hover:text-amber-400 transition-colors">🛍️ Propaganda e produto</h3>
+          <p class="text-neutral-400 text-sm mb-4">Fast food, produto premium, lifestyle, beauty, tech gadget, bebida com splash.</p>
+        </a>
+
+        <a href="modulo-4-2.html" class="group bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 hover:border-amber-400 transition-all">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-amber-400 bg-amber-500/20 px-2 py-1 rounded">4.2</span>
+            <span class="text-xs text-neutral-500">6 receitas</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-2 group-hover:text-amber-400 transition-colors">🎬 Cinema e curta</h3>
+          <p class="text-neutral-400 text-sm mb-4">Noir, sci-fi cyberpunk, drama Kodak Portra, thriller Fincher, faroeste Deakins, VHS anos 80.</p>
+        </a>
+
+        <a href="modulo-4-3.html" class="group bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 hover:border-amber-400 transition-all">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-amber-400 bg-amber-500/20 px-2 py-1 rounded">4.3</span>
+            <span class="text-xs text-neutral-500">6 receitas</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-2 group-hover:text-amber-400 transition-colors">🎨 Animação e desenho</h3>
+          <p class="text-neutral-400 text-sm mb-4">Pixar 3D, Studio Ghibli aquarela, anime cel-shading, motion graphics 2D, claymation, Cartoon Network.</p>
+        </a>
+
+        <a href="modulo-4-4.html" class="group bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 hover:border-amber-400 transition-all">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-amber-400 bg-amber-500/20 px-2 py-1 rounded">4.4</span>
+            <span class="text-xs text-neutral-500">6 receitas</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-2 group-hover:text-amber-400 transition-colors">✨ Casos especiais</h3>
+          <p class="text-neutral-400 text-sm mb-4">Logo reveal, Reels 9:16, loop de site (Seedance), capa de álbum, pôster de filme, painel de HQ.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha 3</a>
+      <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-primary text-dark-900 rounded-lg font-bold hover:bg-yellow-300 transition-colors">Início ↑</a>
+    </div>
+
   </main>
+
   <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
 </body>
 </html>

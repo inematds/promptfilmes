@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.1 Propaganda e produto | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;}
+    html:not(.dark) .text-amber-400{color:#92400e;} html:not(.dark) .bg-amber-500\/20{background-color:rgba(217,119,6,.12);}
+    html:not(.dark) .bg-amber-500\/10{background-color:rgba(217,119,6,.08);} html:not(.dark) .border-amber-500\/30{border-color:rgba(217,119,6,.25);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);} html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a><span>/</span>
+      <span class="text-amber-400">Módulo 4.1</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🛍️ Propaganda e produto</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Seis receitas de still publicitário. Cada uma com prompt EN pronto + ferramenta recomendada + variações.</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">1</span>🍔 Anúncio de fast food</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">MJ v7 ou Flux</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Hero do hambúrguer dominando o quadro, gradiente escuro top/bottom pra texto, headline pronta pra entrar.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">hero food photography of a juicy double cheeseburger with melted cheddar dripping, sesame brioche bun freshly baked, lettuce and tomato peeking, dramatic studio lighting from above, deep brown gradient background fading to black at top and bottom, hyper detailed texture, shallow depth of field 85mm macro, vibrant amber and crimson palette, hunger-inducing appetizing mood --ar 9:16 --no text, watermark, blurry</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: trocar burger por pizza, sushi, sorvete. Trocar ângulo (top-down para layout flat).</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">2</span>👜 Produto premium em fundo escuro</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">Flux 1.1 Pro</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Estética minimalista de luxo. Sujeito centralizado, fundo preto profundo, rim light de cor única.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">minimalist luxury product photography of [PRODUCT, e.g. leather handbag in deep oxblood], floating against pure black void background, single soft rim light from upper-left creating subtle highlights, shot on Phase One 100mm macro, ultra-sharp detail, dramatic chiaroscuro, refined sophisticated mood, magazine quality --ar 4:5 --no clutter, no shadow on background, no logo, no text</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: relógio, perfume, joia, garrafa. Trocar cor do rim light (azul cyan, dourado, magenta).</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">3</span>🏃 Lifestyle ad outdoor</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">Runway Gen-4 ou MJ v7</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Pessoa real usando produto em cenário aspiracional. Foco no sentimento, não no objeto.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">aspirational lifestyle photograph of a 30-year-old athletic woman running across a coastal trail at golden hour, wearing premium sportswear [BRAND], sweat glistening on her skin, expression of focused joy, ocean and cliffs in soft background bokeh, shot on 85mm f/1.8, warm cinematic color grade, Nike-style commercial aesthetic, motion blur subtle on legs --ar 4:5 --no stiff pose, no studio look, no fake smile</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: yoga matinal, escalada, ciclismo urbano, surfe. Tonificar para mood do produto.</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">4</span>💄 Beauty close-up</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">MJ v7 ou Flux</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Pele perfeita, foco em detalhe de maquiagem ou produto. Iluminação de catálogo Vogue.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">editorial beauty close-up of a woman's face, focus on her glossy ruby lips and subtle gold eye makeup, soft butterfly lighting from front with gentle fill, flawless dewy skin, freckles visible, ethereal mood, shot on Hasselblad with 120mm macro, Vogue editorial style, fashion photography 2026, pastel rose background gradient --ar 4:5 --no oversmoothing, no plastic skin, no airbrushed look</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: foco em cabelo, perfume sendo aplicado, base, fragrance. Mudar mood (etéreo / editorial / urban).</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">5</span>📱 Tech gadget em mesa minimalista</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">Flux 1.1 Pro</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Estética Apple/Nothing/Teenage Engineering. Top-down ou 3/4, fundo limpo, paleta minimalista.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">premium tech product photography of [DEVICE, e.g. minimalist wireless earbuds in matte white], floating slightly above a clean concrete textured surface, top-down 3/4 angle, soft diffused studio light with no harsh shadows, monochromatic palette with single accent color reflection, Apple keynote aesthetic, ultra-sharp detail on textures, 50mm macro --ar 4:5 --no clutter, no other objects, no reflection of room</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: fone, smartwatch, smartphone, smart speaker. Adicionar 1 acessório (cabo, case) para storytelling.</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">6</span>🥤 Bebida com splash e gelo</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">MJ v7 ou Flux</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">High-speed photography. Líquido em movimento, gotas suspensas, gelo cristalino. Conta a "sensação".</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">high-speed commercial photography of an icy [DRINK, e.g. citrus iced tea] being poured into a tall glass, vibrant amber liquid splashing dynamically, large ice cubes suspended mid-fall, fresh lime slices and mint leaves frozen in air, condensation droplets on glass, white seamless studio background, hard rim light from behind catching the splashes, Pepsi-style commercial aesthetic, 100mm macro frozen at 1/8000s --ar 4:5 --no spilling on table, no blur</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: refrigerante, suco, cerveja com espuma, café cold brew. Mudar acessórios (fruta, especiaria, gelo).</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📚</span>Próximo módulo</h2>
+        <p class="text-neutral-300 mb-6">4.2 — Cinema e curta. Seis estéticas cinematográficas prontas para copy-paste.</p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+          <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

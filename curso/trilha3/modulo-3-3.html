@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.3 Pipeline híbrido | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;}
+    html:not(.dark) .text-purple-400{color:#7c3aed;} html:not(.dark) .bg-purple-500\/20{background-color:rgba(124,58,237,.12);}
+    html:not(.dark) .bg-purple-500\/10{background-color:rgba(124,58,237,.08);} html:not(.dark) .border-purple-500\/30{border-color:rgba(124,58,237,.25);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);} html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a><span>/</span>
+      <span class="text-purple-400">Módulo 3.3</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔧 Pipeline híbrido</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">IA + foto real, integração com AE/Premiere, voz e lipsync, foley e som, upscale 4K e entrega broadcast-ready.</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">📸 IA + foto real em layers</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Marca, produto e pessoa real raramente saem perfeitos só de IA. <strong class="text-purple-400">Combinar é mais profissional</strong> que insistir.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Workflow padrão</h3>
+        <ol class="text-sm text-neutral-300 space-y-2 list-decimal pl-4">
+          <li>Foto real do sujeito (produto/pessoa) em fundo neutro ou recortado.</li>
+          <li>Cenário gerado por IA (Flux/MJ) com luz e ângulo compatíveis.</li>
+          <li>Compor em Photoshop ou Krea: mask do sujeito → posicionar no cenário.</li>
+          <li>Color match: ajustar curvas do sujeito pra paleta do cenário.</li>
+          <li>Light match: adicionar sombra própria e luz reflexa de cor compatível.</li>
+          <li>Grain unificador: leve grão por cima de tudo "amarra" os elementos.</li>
+        </ol>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <p class="text-neutral-300 text-sm">Em 2026, o atalho rápido é usar <strong>Nano Banana</strong> ou <strong>Flux Kontext</strong>: subir as 2 imagens e pedir "compose subject A into scene B, matching lighting and color". 80% da composição vem pronta.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">🎬 IA → After Effects / DaVinci Fusion</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Clipe IA "puro" tem look de IA. Adicionar overlay, tracking ou rotoscopia em AE/Fusion transforma em produto comercial.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Casos comuns</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong>Rotoscopia:</strong> isolar sujeito do clipe IA pra trocar o fundo. RotoBrush 3 (AE 2026) ou Magic Mask (DaVinci) fazem em 1 clique.</li>
+          <li>• <strong>Tracking de objeto:</strong> adicionar texto/logo que segue um ponto da cena. Mocha planar tracker é padrão.</li>
+          <li>• <strong>Title cards e lower-thirds:</strong> graphics overlay que dão profissionalismo.</li>
+          <li>• <strong>Color grading adicional:</strong> mesmo com look IA bom, segunda passada em Lumetri/Color Page fecha o filme.</li>
+          <li>• <strong>Estabilização:</strong> alguns clipes IA tremem sutilmente; Warp Stabilizer corrige.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">🎙️ Voz, lipsync e dublagem</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Em 2026, vídeo sem voz falada parece amador. Lipsync ruim parece fraudulento. Ferramenta certa resolve.</p>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6 text-sm">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-purple-400 mb-2">Geração de voz</h4>
+          <ul class="text-neutral-300 space-y-1">
+            <li>• <strong>ElevenLabs v3:</strong> referência. Português perfeito, nuance emocional, clonagem de voz.</li>
+            <li>• <strong>OpenAI TTS:</strong> rápido e barato, qualidade alta</li>
+            <li>• <strong>Suno (música cantada):</strong> jingles, faixas com letra</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-purple-400 mb-2">Lipsync</h4>
+          <ul class="text-neutral-300 space-y-1">
+            <li>• <strong>HeyGen:</strong> mais usado em produção, qualidade alta</li>
+            <li>• <strong>Sync.so:</strong> bom para clipes IA gerados</li>
+            <li>• <strong>D-ID:</strong> bom para foto estática "falando"</li>
+            <li>• <strong>Sora 2 nativo:</strong> com diretiva de fala, gera lipsync junto</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-2 flex items-center"><span class="mr-2">⚖️</span>Ética e consentimento</h3>
+        <p class="text-neutral-300 text-sm">Clonar voz de pessoa real exige consentimento explícito. Para vozes públicas (apresentadores, celebridades) é proibido sem licença. Para sua marca: clone só sua própria voz ou de profissionais contratados com termo.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🔊 Som e foley</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">90% da percepção de "produção" vem do áudio. Imagem boa + som ruim = amador. Imagem fraca + som rico = aceita.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Camadas de áudio (top-down)</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong class="text-purple-400">Diálogo / VO</strong> (mais alto, ~-12 LUFS)</li>
+          <li>• <strong class="text-purple-400">Foley pontual</strong> (passos, objetos, gestos)</li>
+          <li>• <strong class="text-purple-400">Música</strong> (suporte emocional; ducking automático sob diálogo)</li>
+          <li>• <strong class="text-purple-400">Ambiente / room tone</strong> (camada constante por baixo, ~-30 LUFS)</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Fontes em 2026</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong>ElevenLabs Music + SFX:</strong> gera trilha e foley sob comando</li>
+          <li>• <strong>Suno:</strong> jingles e tracks com letra</li>
+          <li>• <strong>Epidemic Sound, Artlist:</strong> bibliotecas pagas curadas</li>
+          <li>• <strong>Sora 2:</strong> diegético embutido (cidade, foley do clipe)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">🔍 Upscale e finalização</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Topaz Video AI continua referência em 2026. Para finalizar broadcast-ready, processo claro.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Pipeline de finalização</h3>
+        <ol class="text-sm text-neutral-300 space-y-2 list-decimal pl-4">
+          <li><strong>Topaz Video AI</strong> com modelo Proteus → upscale 1080p ou 4K limpo.</li>
+          <li><strong>DaVinci Color Page:</strong> primary correction (balanço de branco, exposição), depois secondary (skin tones, dominantes).</li>
+          <li><strong>Grain unificador leve</strong>: dá textura coerente entre todos os clipes.</li>
+          <li><strong>Audio mastering:</strong> compressão, limitação, LUF target (-14 web, -23 broadcast).</li>
+          <li><strong>Export H.264</strong> bitrate alto OU <strong>ProRes 422</strong> se cliente vai editar mais.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">📤 Entrega: codec, color space, naming</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Cliente lembra do "como" tanto quanto do "que". Entrega profissional é parte do trabalho.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Matriz de entrega por canal</h3>
+        <table class="w-full text-sm">
+          <thead><tr class="text-purple-400 text-left border-b border-dark-600"><th class="py-2 pr-4">Destino</th><th class="py-2 pr-4">Codec</th><th class="py-2 pr-4">Color</th><th class="py-2">Audio</th></tr></thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">Web / YouTube</td><td class="py-2 pr-4">H.264, 15 Mbps</td><td class="py-2 pr-4">Rec.709</td><td class="py-2">-14 LUFS</td></tr>
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">Instagram/TikTok</td><td class="py-2 pr-4">H.264, 8-10 Mbps</td><td class="py-2 pr-4">Rec.709</td><td class="py-2">-14 LUFS</td></tr>
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">Broadcast TV</td><td class="py-2 pr-4">ProRes 422 ou DNxHD</td><td class="py-2 pr-4">Rec.709 BT.1886</td><td class="py-2">-23 LUFS</td></tr>
+            <tr><td class="py-2 pr-4">Cinema/HDR</td><td class="py-2 pr-4">ProRes 4444 ou DNxHR</td><td class="py-2 pr-4">Rec.2020 HDR10</td><td class="py-2">-23 LUFS</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">Naming convention</h3>
+        <p class="text-neutral-300 text-sm mb-2">Exemplo: <code class="font-mono text-purple-400">projetoX_promo_v3_16x9_1080p_2026-05-17.mp4</code></p>
+        <ul class="text-neutral-400 text-xs space-y-1">
+          <li>• <strong>nome do projeto</strong> · tipo de peça · versão · aspect · resolução · data</li>
+          <li>• Versões em V (V1, V2, V3) — não "final", "final_final"</li>
+          <li>• Sempre datado pra rastreabilidade</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span>Resumo do módulo</h2>
+        <div class="space-y-3 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">IA + foto real em layers</strong><span class="text-neutral-400"> — mais profissional que insistir só em IA</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">AE/DaVinci pós-IA</strong><span class="text-neutral-400"> — roto, tracking, color grade, overlay</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Voz + lipsync</strong><span class="text-neutral-400"> — ElevenLabs v3 + HeyGen ou Sora nativo</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Som em camadas</strong><span class="text-neutral-400"> — diálogo, foley, música, ambiente</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Finalização padrão</strong><span class="text-neutral-400"> — Topaz + Color + master audio</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Entrega por canal</strong><span class="text-neutral-400"> — codec, color, naming consistente</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-purple-400 mb-2">Próximo Módulo:</h3><p class="text-neutral-300">3.4 — Exercícios práticos (6 desafios de produção real)</p></div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="modulo-3-4.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próximo módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

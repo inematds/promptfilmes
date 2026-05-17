@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.4 Casos especiais | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;}
+    html:not(.dark) .text-amber-400{color:#92400e;} html:not(.dark) .bg-amber-500\/20{background-color:rgba(217,119,6,.12);}
+    html:not(.dark) .bg-amber-500\/10{background-color:rgba(217,119,6,.08);} html:not(.dark) .border-amber-500\/30{border-color:rgba(217,119,6,.25);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);} html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a><span>/</span>
+      <span class="text-amber-400">Módulo 4.4</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.4</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">✨ Casos especiais</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Seis formatos específicos do dia-a-dia: logo reveal animado, Reels 9:16, loop de site, capa de álbum, pôster de filme, painel de HQ.</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">1</span>✨ Logo reveal animado</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">Runway Gen-4 + AE</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Logo aparecendo de partículas ou luz, 3-5s. Funciona como abertura de vídeo de marca.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">[First frame: still of brand logo on solid background]
+[Last frame: dispersed particles in same color palette]
+prompt: "particles of warm golden dust slowly converge and assemble into a sharp clean logo shape over 4 seconds, glowing rim light forming around the logo edges, premium luxury brand reveal aesthetic, dark deep background, subtle volumetric light rays"</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Para versão reverse (dispersar logo), inverter first/last. Trocar partículas por água, fumaça, faíscas.</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">2</span>📱 Reels/Shorts 9:16 com hook</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">Sora 2 ou Runway</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Clipe vertical de 5-10s otimizado para social. Primeira meio-segundo é decisivo — ação rápida.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">vertical 9:16 social media clip, fast attention-grabbing opening: [HOOK ACTION, e.g. a chef tossing fresh ingredients into a sizzling pan, sparks flying]. Quick natural movement, vibrant high contrast colors, well-lit subject filling the vertical frame, leave top 1/3 and bottom 1/4 with negative space for text overlay, 5 seconds, shot on iPhone 16 Pro aesthetic but cinematic, with diegetic sound of sizzle and chopping</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: produto chegando à mão, antes/depois de transformação, primeiro plano de reação humana surpresa.</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">3</span>♾️ Background loop para site</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">Seedance 2</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Loop de 6-10s atrás do hero da landing page. Movimento sutil, contínuo, sem eventos pontuais.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">slow aerial drift over a misty mountain range at dawn, soft clouds gently flowing through valleys, warm golden light bathing distant peaks, no sudden events, continuous gentle motion, cinematic atmosphere, deep contrast preserving negative space at top for white text overlay — seamless loop, no cuts, repeating naturally</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: oceano com ondas calmas, fumaça de café subindo em loop, partículas em campo magnético abstrato. Skill <code class="mono text-amber-400">/seedance-loop-prompt</code> ajuda a estruturar.</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">4</span>💿 Capa de álbum</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">MJ v7 ou Flux</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Quadrado 1:1, conceito visual forte, espaço para nome do artista + título. Inspiração: Pink Floyd, Frank Ocean, Arctic Monkeys.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">album cover art, square 1:1 format, single striking visual concept: [CONCEPT, e.g. a lone red telephone booth in a vast desert at sunset], surreal cinematic composition, restricted palette of three colors (rust, cream, deep blue), shot on medium format film with grain, in the style of Storm Thorgerson (Pink Floyd) meets modern indie album art, mysterious evocative mood, leave clean negative space in upper-third for "ARTIST" type and lower-third for "ALBUM TITLE", no text in the image itself --ar 1:1 --no clutter</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: retrato editorial frontal, paisagem abstrata, ilustração simbólica, fotomontagem surrealista.</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">5</span>🎞️ Pôster de filme</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">Ideogram 3 ou Flux</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Composição vertical 2:3, hierarquia clássica: imagem dominante + título + créditos. Texto na própria imagem precisa sair certo (Ideogram).</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">cinematic movie poster, vertical 2:3 format, dominant central image of [SCENE, e.g. a silhouetted figure standing before a glowing red door], dramatic high-contrast cinematic lighting, restricted palette (black, deep red, ivory), title "THE THRESHOLD" in bold serif typography at top center, smaller "A FILM BY ANA SOUSA" below, fake credits block in tiny type at bottom, vintage independent cinema aesthetic, in the style of A24 and Mubi movie poster design --ar 2:3 --no superhero look</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: horror, drama, sci-fi, comédia romântica. Trocar tipografia (serif clássica vs sans modern).</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold flex items-center"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl mr-4">6</span>💥 Quadrinho / HQ painel</h2>
+        <span class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded">MJ v7 ou Flux</span>
+      </div>
+      <p class="text-neutral-300 mb-4 text-sm">Linha forte, sombras hachuradas, cores chapadas, balão de fala. Estilo Frank Miller / Jim Lee.</p>
+      <pre class="bg-dark-900 rounded-lg p-4 text-sm text-amber-400 overflow-x-auto"><code class="mono">graphic novel comic book panel, single full-page composition, dynamic dramatic pose of [HERO, e.g. a masked vigilante leaping across a rooftop in the rain], bold strong inked linework with cross-hatching for shadows, flat saturated comic color palette, halftone dot pattern for shading, dramatic foreshortening, in the style of Frank Miller (Sin City) meets Jim Lee (DC), thought balloon with text "Tonight ends." in caption font, sound effect "SPLASH!" in large stylized text, gritty noir mood --ar 2:3 --no photo realism, no 3D</code></pre>
+      <p class="text-neutral-400 text-xs mt-3">Variações: super-herói clássico (estilo Marvel anos 90), mangá P&B (estilo Berserk), HQ europeia (Moebius), webcomic moderno.</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎓</span>Você terminou o curso completo</h2>
+        <p class="text-neutral-300 mb-6">Fundamentos, Técnicas, Avançado e 24 receitas prontas. Volte aqui sempre que precisar — esta trilha é a sua biblioteca.</p>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximos passos</h3>
+          <ul class="text-sm text-neutral-300 space-y-1">
+            <li>• Adicionar suas próprias receitas em um documento pessoal</li>
+            <li>• Compartilhar resultados na comunidade INEMA.CLUB</li>
+            <li>• Revisitar T3 sempre que pegar um projeto novo (bíblia visual primeiro)</li>
+            <li>• Acompanhar lançamentos de ferramentas — o curso será atualizado</li>
+          </ul>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-4-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-primary text-dark-900 rounded-lg font-bold hover:bg-yellow-300 transition-colors">Voltar para início</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

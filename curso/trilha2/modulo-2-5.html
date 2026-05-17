@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.5 Passo-a-passo: clip de 10s | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;}
+    html:not(.dark) .text-blue-400{color:#2563eb;} html:not(.dark) .bg-blue-500\/20{background-color:rgba(37,99,235,.12);}
+    html:not(.dark) .bg-blue-500\/10{background-color:rgba(37,99,235,.08);} html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);} html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.5</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.5 · PROJETO</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🗺️ Passo-a-passo: clip de 10 segundos</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Do storyboard ao MP4 entregue. Projeto fio-condutor: abertura de podcast sobre cidade — 10s, dois planos cortando do skyline pra entrevistada no estúdio.</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-12">
+      <h2 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">📋</span>Briefing</h2>
+      <p class="text-neutral-300 italic mb-2">"Abertura de um podcast sobre cidade. 10s. Skyline + transição para entrevistada no estúdio."</p>
+      <p class="text-neutral-400 text-sm">Vamos quebrar em 2 shots de 5s. Cada um na ferramenta certa pro tipo de plano.</p>
+    </div>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">📋 Passo 1 — Shot list</h2></div>
+      <p class="text-neutral-300 mb-6">Em 2026 é mais barato e melhor fazer 2 clipes de 5s do que 1 de 10s — coerência cai com a duração.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <table class="w-full text-sm">
+          <thead><tr class="text-blue-400 text-left border-b border-dark-600"><th class="py-2 pr-4">Shot</th><th class="py-2 pr-4">Conteúdo</th><th class="py-2 pr-4">Câmera</th><th class="py-2">Ferramenta</th></tr></thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">1</td><td class="py-2 pr-4">Skyline São Paulo ao amanhecer, neblina baixa</td><td class="py-2 pr-4">Slow drone push forward</td><td class="py-2">Veo 3</td></tr>
+            <tr><td class="py-2 pr-4">2</td><td class="py-2 pr-4">Entrevistada se acomoda no estúdio, ajusta microfone</td><td class="py-2 pr-4">Static medium shot</td><td class="py-2">Runway Gen-4 + ACT</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mt-6">
+        <p class="text-neutral-300 text-sm"><strong class="text-primary">Cut motivado:</strong> a luz dourada do skyline (shot 1) "vira" a luz quente da janela do estúdio (shot 2). É a costura emocional do corte.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">🖼️ Passo 2 — Gerar stills de referência</h2></div>
+      <p class="text-neutral-300 mb-6">10x mais barato refinar still do que vídeo. Resolver composição em foto primeiro.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <p class="text-neutral-400 text-xs mb-1">Still 1 (skyline) — Flux 1.1 Pro:</p>
+        <pre class="bg-dark-900 rounded-lg p-3 text-sm text-blue-400 overflow-x-auto"><code class="mono">aerial photograph of São Paulo skyline at sunrise, low mist hugging the buildings, warm golden light, distant smog haze, cinematic 21:9, shot on Arri Alexa with anamorphic lens, subtle film grain</code></pre>
+        <p class="text-neutral-400 text-xs mb-1 mt-4">Still 2 (estúdio) — MJ v7:</p>
+        <pre class="bg-dark-900 rounded-lg p-3 text-sm text-blue-400 overflow-x-auto"><code class="mono">editorial portrait of a Brazilian woman in her 40s sitting in a podcast studio, adjusting the microphone, warm tungsten desk lamp + soft window light, acoustic foam wall behind, medium shot, 50mm, Kodak Portra 400 grain --ar 21:9</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">🎬 Passo 3 — Animar Shot 1 (skyline) em Veo 3</h2></div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <p class="text-neutral-400 text-xs mb-1">Configuração:</p>
+        <ul class="text-sm text-neutral-300 space-y-1 mb-3">
+          <li>• First-frame: Still 1 gerada</li><li>• Duração: 5s</li><li>• Aspect: 21:9</li>
+        </ul>
+        <p class="text-neutral-400 text-xs mb-1">Prompt:</p>
+        <pre class="bg-dark-900 rounded-lg p-3 text-sm text-blue-400 overflow-x-auto"><code class="mono">A slow drone push forward over the São Paulo skyline at sunrise, mist gently flowing through the buildings, golden light intensifying as the camera moves. Static subject (city), moving camera (drone). Shot on Arri Alexa anamorphic. With diegetic sound of distant city waking up.</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🎤 Passo 4 — Animar Shot 2 (estúdio) em Runway</h2></div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <p class="text-neutral-400 text-xs mb-1">Configuração:</p>
+        <ul class="text-sm text-neutral-300 space-y-1 mb-3">
+          <li>• Image-to-video: Still 2 como first frame</li>
+          <li>• Character Reference: 3 fotos da pessoa real (peso 100)</li>
+          <li>• Duração: 5s</li>
+        </ul>
+        <p class="text-neutral-400 text-xs mb-1">Prompt:</p>
+        <pre class="bg-dark-900 rounded-lg p-3 text-sm text-blue-400 overflow-x-auto"><code class="mono">She slowly sits down at the studio desk, adjusts the microphone gently with her right hand, looks slightly off-camera with a soft confident expression. Static camera, medium shot. Subtle natural movement.</code></pre>
+        <p class="text-neutral-400 text-xs mt-3">Áudio: gerar separado em ElevenLabs (foley de mic sendo ajustado).</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">✂️ Passo 5 — Editar e sonorizar</h2></div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="font-semibold text-blue-400 mb-3">Em DaVinci Resolve (free)</h4>
+        <ol class="text-sm text-neutral-300 space-y-2 list-decimal pl-4">
+          <li>Importar shot 1 (5s) e shot 2 (5s)</li>
+          <li>Cut no meio — testar cross-fade de 6 frames se costura aparecer</li>
+          <li>Música ambiente: gerar 10s em ElevenLabs Music ou Suno (vibe documentário urbano)</li>
+          <li>Áudio diegético do shot 1 (cidade) baixinho · áudio shot 2 (foley do mic) leve</li>
+          <li>Color match: igualar tons quentes dos 2 shots em Color Page</li>
+          <li>Vinheta sutil + grão leve unificado</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">📦 Passo 6 — Upscale e exportar</h2></div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong class="text-blue-400">Upscale:</strong> Topaz Video AI Proteus model → 1080p limpo. (Não precisa 4K para podcast.)</li>
+          <li>• <strong class="text-blue-400">Export:</strong> H.264, bitrate 15 Mbps, 1920×1080 ou 2560×1080 (21:9), 24fps cinematic</li>
+          <li>• <strong class="text-blue-400">Naming:</strong> <code class="mono text-blue-400">podcast-intro_v3_2026-05-17.mp4</code> — versionado e datado</li>
+          <li>• <strong class="text-blue-400">Versão alt:</strong> gerar também 9:16 reframe pra Reels (crop central, perde laterais)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎓</span>Você terminou a Trilha 2</h2>
+        <p class="text-neutral-300 mb-6">Você sabe escolher e operar 9 ferramentas. Tem pipeline real do still ao vídeo entregue. Próxima trilha: pensar como diretor de arte sobre tudo isso.</p>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-blue-400 mb-2">Próxima Trilha:</h3><p class="text-neutral-300">Trilha 3 — Avançado: direção de arte, storytelling em sequência, pipeline híbrido.</p></div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Trilha 3: Avançado →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

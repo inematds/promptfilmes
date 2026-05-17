@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.3 Movimento e câmera em vídeo | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;}
+    html:not(.dark) .text-blue-400{color:#2563eb;} html:not(.dark) .bg-blue-500\/20{background-color:rgba(37,99,235,.12);}
+    html:not(.dark) .bg-blue-500\/10{background-color:rgba(37,99,235,.08);} html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);} html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.3</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🎥 Movimento e câmera em vídeo</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Verbos de câmera, separação sujeito vs câmera, slow-mo, keyframing (first/last frame), continuidade entre clipes e loops perfeitos.</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">📹 Verbos de câmera</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Os modelos foram treinados em milhões de descrições de cena com vocabulário técnico de cinema. Use o jargão certo — "<em>the camera moves</em>" não diz nada.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📋 Os verbos que funcionam</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong class="text-blue-400">Dolly in / dolly out:</strong> câmera se aproxima/afasta fisicamente do sujeito</li>
+          <li>• <strong class="text-blue-400">Push in / pull out:</strong> sinônimos comuns, mesma ação</li>
+          <li>• <strong class="text-blue-400">Pan left / right:</strong> rotação horizontal sem deslocar</li>
+          <li>• <strong class="text-blue-400">Tilt up / down:</strong> rotação vertical sem deslocar</li>
+          <li>• <strong class="text-blue-400">Tracking shot:</strong> câmera acompanha lateralmente o sujeito andando</li>
+          <li>• <strong class="text-blue-400">Crane shot:</strong> câmera sobe/desce em arco amplo</li>
+          <li>• <strong class="text-blue-400">Drone shot / aerial:</strong> aéreo, geralmente em movimento</li>
+          <li>• <strong class="text-blue-400">Orbit / arc:</strong> câmera gira ao redor do sujeito</li>
+          <li>• <strong class="text-blue-400">Handheld / steadicam:</strong> estética (instável vs fluido)</li>
+          <li>• <strong class="text-blue-400">Static / locked-off:</strong> câmera parada, só sujeito se move</li>
+        </ul>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-2 flex items-center"><span class="mr-2">💡</span>Sempre adjetivo + verbo + alvo</h3>
+        <p class="text-neutral-300 text-sm">Em vez de "dolly in", escreva "<em>slow dolly in toward the actor's face</em>". Velocidade e alvo dão controle real.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">🏃 Sujeito vs câmera — separe os dois eixos</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">É o erro #1 de quem começa em vídeo IA. "<em>A girl running</em>" pode virar câmera correndo + garota parada. <strong class="text-blue-400">Nomeie sempre os dois eixos.</strong></p>
+      <div class="grid sm:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-3">✓ Forma correta</h4>
+          <ul class="text-sm text-neutral-300 space-y-2">
+            <li>"<em>The subject walks forward toward the camera. The camera remains static.</em>"</li>
+            <li>"<em>The subject is motionless, leaning against the wall. The camera slowly dollies in.</em>"</li>
+            <li>"<em>The subject runs left-to-right across the frame. The camera follows in a smooth tracking shot.</em>"</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-3">✗ Forma confusa</h4>
+          <ul class="text-sm text-neutral-300 space-y-2">
+            <li>"A girl running" (modelo decide qualquer coisa)</li>
+            <li>"The camera moves with the subject" (vago, sem alvo)</li>
+            <li>"Action scene" (puro mood, sem direção)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">⏱️ Slow-mo, time-lapse, speed ramp</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Em comercial e clipe musical, controle de tempo é metade do impacto visual.</p>
+      <div class="grid sm:grid-cols-3 gap-4 mb-6 text-sm">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">Slow motion</h4>
+          <p class="text-neutral-300 mb-2">Movimento lento dramático. Comum em beauty, esporte, drama.</p>
+          <pre class="bg-dark-900 rounded p-2 text-xs text-blue-400">"shot in slow motion, 240fps look"</pre>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">Time-lapse</h4>
+          <p class="text-neutral-300 mb-2">Aceleração de eventos longos (nuvens, tráfego, sombras).</p>
+          <pre class="bg-dark-900 rounded p-2 text-xs text-blue-400">"time-lapse, clouds moving fast"</pre>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-blue-400 mb-2">Speed ramp</h4>
+          <p class="text-neutral-300 mb-2">Transição entre velocidades dentro do clipe.</p>
+          <pre class="bg-dark-900 rounded p-2 text-xs text-blue-400">"speed ramp from real-time to slow-mo at impact"</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🎯 First frame / last frame</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A forma mais <strong class="text-blue-400">precisa</strong> de controlar vídeo: você escolhe os pontos exatos de início e fim, o modelo só preenche o meio. Disponível em Runway, Veo, Kling, Pika.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">Workflow</h3>
+        <ol class="text-sm text-neutral-300 space-y-2 list-decimal pl-4">
+          <li>Gerar still 1 (estado inicial)</li>
+          <li>Gerar still 2 (estado final) — usando i2i da still 1 para manter coerência</li>
+          <li>Subir as duas como first/last frame</li>
+          <li>Prompt curto descrevendo a transição: "<em>character turns head from looking at phone to looking out the window</em>"</li>
+          <li>Gerar 3-4 versões. Escolher a melhor.</li>
+        </ol>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <p class="text-neutral-300 text-sm">Frames muito diferentes (cenário totalmente outro) geram morphing estranho. Para mudança grande, divida em 2 clipes com cut motivado entre eles.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">🔗 Continuidade entre clipes</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Como montar uma cena de 30s com clipes de 5s sem que o espectador veja a costura.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">A regra do "last frame → next first frame"</h3>
+        <ol class="text-sm text-neutral-300 space-y-2 list-decimal pl-4">
+          <li>Gere clipe A. Extraia o último frame (export PNG).</li>
+          <li>Use esse PNG como first-frame do clipe B.</li>
+          <li>Prompt do clipe B continua a ação de onde A parou.</li>
+          <li>Conferir luz: se desviar, gerar still de transição entre A e B.</li>
+          <li>Em edição: cross-fade de 2-4 frames mascara qualquer micro-desvio.</li>
+        </ol>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <p class="text-neutral-400 text-sm">Em Runway: timeline interna já facilita encadear clipes. Em Sora/Veo: download → upload → continuar.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">♾️ Loops perfeitos</h2></div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Vídeo que termina onde começa sem salto. <strong class="text-blue-400">Seedance 2</strong> é a ferramenta especializada de 2026.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">Princípios do loop</h3>
+        <ul class="text-sm text-neutral-300 space-y-2">
+          <li>• <strong>Movimento cíclico:</strong> água, fumaça, partículas, ondas, nuvens — coisas que continuam.</li>
+          <li>• <strong>Evitar eventos pontuais:</strong> relógio batendo, gota caindo, porta abrindo — qualquer "fim" cria salto.</li>
+          <li>• <strong>Paleta consistente:</strong> mudança de luz/cor força um "início" perceptível.</li>
+          <li>• <strong>Câmera lenta e contínua:</strong> orbit, slow dolly, ou estática.</li>
+          <li>• <strong>Testar:</strong> reproduzir 5x seguidas sem perceber a costura.</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <p class="text-neutral-400 text-sm mb-2">Estrutura de prompt pra Seedance:</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-blue-400 overflow-x-auto"><code class="mono">[scene description] [continuous motion description] [lighting] [aesthetic] — seamless loop, no cuts, repeating naturally</code></pre>
+        <p class="text-neutral-400 text-xs mt-3 italic">Skill <code class="mono">/seedance-loop-prompt</code> gera prompts otimizados para Seedance 2.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span>Resumo do módulo</h2>
+        <div class="space-y-3 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Verbos de câmera técnicos</strong><span class="text-neutral-400"> — dolly, pan, tilt, tracking + velocidade + alvo</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Separar sujeito e câmera</strong><span class="text-neutral-400"> — sempre nomear os dois eixos</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Controle de tempo</strong><span class="text-neutral-400"> — slow-mo, time-lapse, speed ramp</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">First/last frame</strong><span class="text-neutral-400"> — controle máximo do início e fim</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Continuidade</strong><span class="text-neutral-400"> — last frame de A = first frame de B</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Loops perfeitos</strong><span class="text-neutral-400"> — movimento cíclico, sem eventos pontuais</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-blue-400 mb-2">Próximo Módulo:</h3><p class="text-neutral-300">2.4 — Exercícios práticos (6 desafios em ferramentas diferentes)</p></div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="modulo-2-4.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>
