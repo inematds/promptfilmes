@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.5 Passo-a-passo: seu primeiro still | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;} html:not(.dark) .border-dark-700{border-color:#e5e7eb;}
+    html:not(.dark) .text-emerald-400{color:#059669;}
+    html:not(.dark) .bg-emerald-500\/20{background-color:rgba(5,150,105,.12);}
+    html:not(.dark) .bg-emerald-500\/10{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .border-emerald-500\/30{border-color:rgba(5,150,105,.25);}
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover{background-color:rgba(5,150,105,.18);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);}
+    html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);} html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.5</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.5 · PROJETO</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🗺️ Passo-a-passo: seu primeiro still cinematográfico</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Caminhada guiada do briefing à imagem final. Aplica tudo da Trilha 1 em um projeto fio-condutor: um motorista de táxi numa noite chuvosa em São Paulo.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Passos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Projeto</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-12">
+      <h2 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center"><span class="mr-2">📋</span>Briefing recebido</h2>
+      <p class="text-neutral-300 italic mb-2">"Foto cinematográfica de um motorista de táxi em São Paulo, noite chuvosa, vibe Taxi Driver. Vamos usar como capa de podcast."</p>
+      <p class="text-neutral-400 text-sm">Não tem mais nada. Tudo o que segue saiu desse parágrafo curto.</p>
+    </div>
+
+    <!-- PASSO 1 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📋 Passo 1 — Decifrar o briefing</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">A primeira tarefa do prompt-diretor é quebrar o verbal em <strong class="text-emerald-400">estrutural</strong>. Cada palavra do briefing vira uma coluna.</p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-emerald-400 text-left border-b border-dark-600">
+              <th class="py-2 pr-4">Bloco</th><th class="py-2 pr-4">Do briefing</th><th class="py-2">Decisão</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">Meio</td><td class="py-2 pr-4">"foto cinematográfica"</td><td class="py-2">cinematic photography</td></tr>
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">Sujeito</td><td class="py-2 pr-4">"motorista de táxi"</td><td class="py-2">homem ~50 anos, cansado, jaqueta gasta</td></tr>
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">Ação</td><td class="py-2 pr-4">implícito</td><td class="py-2">olhando pelo retrovisor / mão no volante</td></tr>
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">Ambiente</td><td class="py-2 pr-4">"São Paulo, noite chuvosa"</td><td class="py-2">táxi parado em semáforo, av urbana, asfalto molhado</td></tr>
+            <tr class="border-b border-dark-700"><td class="py-2 pr-4">Mood</td><td class="py-2 pr-4">"vibe Taxi Driver"</td><td class="py-2">solitário, melancólico, levemente ameaçador</td></tr>
+            <tr><td class="py-2 pr-4">Uso</td><td class="py-2 pr-4">"capa de podcast"</td><td class="py-2">vertical-friendly, foco no rosto, espaço pra texto</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PASSO 2 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">📷 Passo 2 — Lente e enquadramento</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Pra <strong class="text-emerald-400">solidão íntima</strong> + capa de podcast, a escolha é <strong class="text-emerald-400">85mm</strong> (compressão, isolamento) com <strong>medium close-up</strong> através do para-brisa. Profundidade rasa <strong>f/1.8</strong> borra a chuva e isola o rosto.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <p class="text-neutral-400 text-sm mb-1">Decisão técnica:</p>
+        <p class="text-neutral-300">85mm · medium close-up · f/1.8 shallow · through-the-windshield POV · slight rule-of-thirds offset (rosto no terço direito, retrovisor entrando no terço esquerdo)</p>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <p class="text-neutral-300 text-sm">A lente foi escolhida pelo que conta sobre o personagem — não por "qual é mais bonita". 85mm comprime e isola → reforça a solidão. Esse é o raciocínio de DP, não de equipamento.</p>
+      </div>
+    </section>
+
+    <!-- PASSO 3 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">💡 Passo 3 — Desenhar a luz</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Cena de noite urbana não é "escura" — é <strong class="text-emerald-400">cheia de fontes pontuais</strong>. Mapeamos cada uma:</p>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-emerald-400 mb-2">Key (principal)</h4>
+          <p class="text-neutral-300 text-sm">Semáforo vermelho à frente, refletindo na pele do motorista. Cor saturada, direção frontal-cima.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-emerald-400 mb-2">Fill (preenchimento)</h4>
+          <p class="text-neutral-300 text-sm">Neons azul/cyan da rua atrás (placas, lojas), entrando pelo retrovisor e pela janela traseira.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-emerald-400 mb-2">Rim (recorte)</h4>
+          <p class="text-neutral-300 text-sm">Faróis de um carro vindo de frente, contorno branco-amarelo na borda do rosto e do ombro.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-emerald-400 mb-2">Ambient (cenário)</h4>
+          <p class="text-neutral-300 text-sm">Chuva refletindo asfalto molhado, gotas no para-brisa borrando luzes em forma de bokeh.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASSO 4 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🎨 Passo 4 — Paleta e referência</h2>
+      </div>
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <div class="space-y-3 text-neutral-300 text-sm">
+          <div><strong class="text-emerald-400">Paleta:</strong> vermelho saturado (key) + cyan/azul (fill) + preto profundo (sombras). Alto contraste, alta saturação localizada.</div>
+          <div><strong class="text-emerald-400">Estoque de filme:</strong> Cinestill 800T — tungsten-balanceado, halation laranja característica em luzes brilhantes.</div>
+          <div><strong class="text-emerald-400">Referências de estilo:</strong> Wong Kar-wai (neon saturado, melancolia) + Taxi Driver (1976) mood (solidão urbana) — usar como mood, não como cópia.</div>
+          <div><strong class="text-emerald-400">Aspect:</strong> 4:5 vertical (capa de podcast funciona vertical) — declarar em ferramenta com seletor; reforçar no texto.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASSO 5 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📝 Passo 5 — Montar o prompt final</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Junção na ordem hierárquica: meio → sujeito → ação → ambiente → lente → luz → composição → paleta/filme → referência → negativos.</p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <p class="text-neutral-400 text-xs mb-1">📄 PT (briefing estendido):</p>
+        <p class="text-neutral-300 text-sm">Foto cinematográfica de um motorista de táxi paulistano de uns 50 anos, rosto cansado e marcado, mão direita no volante, olhando pelo retrovisor. Táxi parado num semáforo vermelho, avenida urbana com prédios à noite, chuva fina no para-brisa, asfalto molhado refletindo neons. Lente 85mm f/1.8, medium close-up através do para-brisa, profundidade rasa. Luz principal vermelha do semáforo, fill cyan/azul de neons atrás, rim quente de faróis vindo de frente. Composição na regra dos terços, rosto no terço direito. Paleta vermelho + cyan + preto profundo, alto contraste, filme Cinestill 800T com halation laranja característica. Mood Wong Kar-wai + Taxi Driver, solitário e melancólico. Aspect 4:5 vertical.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <p class="text-neutral-400 text-xs mb-1">📋 EN — versão Midjourney v7:</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">cinematic photograph of a tired São Paulo taxi driver in his 50s, weathered face, right hand on the steering wheel, glancing at the rearview mirror, parked at a red traffic light on a rainy urban avenue at night, wet asphalt reflecting neon signs, shot through the windshield with 85mm f/1.8 lens, medium close-up shallow depth of field, red key light from the traffic signal, cyan blue fill from background neons through the rear window, warm rim light from oncoming headlights, rule of thirds with face in right third, Cinestill 800T film with characteristic orange halation, Wong Kar-wai meets Taxi Driver melancholic mood --ar 4:5 --no text, watermark, blurry, deformed hands, extra fingers</code></pre>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <p class="text-neutral-400 text-xs mb-1">📋 EN — versão Flux 1.1 Pro / Ideogram 3 (mais fiel a detalhes):</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">Cinematic 85mm photograph through the windshield of a São Paulo taxi at a red traffic light on a rainy night. The driver, a tired man in his fifties with a weathered face, hands the steering wheel and looks at the rearview mirror. Red traffic light reflects on his skin as primary key light. Cyan neon signs glow through the rear window as fill. Warm headlights from an oncoming car create a rim light on his shoulder. Wet asphalt reflects city lights. Shot on Cinestill 800T film with visible grain and characteristic orange halation around bright lights. Wong Kar-wai meets Taxi Driver atmosphere, melancholic and solitary. Vertical 4:5 framing.
+
+Negative: text, watermark, blurry, extra fingers, deformed face, oversaturated, plastic, instagram filter.</code></pre>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <p class="text-neutral-400 text-xs mb-1">📋 EN — versão Nano Banana / Gemini (conversacional):</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">Generate a vertical 4:5 cinematic photograph. Subject: a tired taxi driver in his 50s with weathered features, hand on the steering wheel, looking at the rearview mirror. Setting: through the windshield of a taxi stopped at a red light, rainy night in São Paulo, wet asphalt reflecting neons. Camera: 85mm lens, shallow depth of field, medium close-up. Lighting: red traffic light as key on his face, cyan neon fill from behind, warm rim from oncoming headlights. Film stock: Cinestill 800T with orange halation. Mood: melancholic, solitary, Wong Kar-wai meets Taxi Driver. Avoid: text, watermark, deformed hands, plastic look.</code></pre>
+      </div>
+    </section>
+
+    <!-- PASSO 6 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🔁 Passo 6 — Iterar e refinar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">A imagem final é a <strong class="text-emerald-400">3ª tentativa</strong>, não a 1ª. Mudança disciplinada: <strong>uma variável por vez</strong> para isolar a causa.</p>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">V1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Primeira geração — diagnóstico</h4>
+            <p class="text-neutral-400 text-sm mb-2">Rodou o prompt completo em Midjourney v7. Imagem boa, mas motorista saiu jovem demais (~30) e o semáforo virou luz genérica de rua.</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-emerald-400">Ajuste:</strong> reforçar idade ("weathered man in his late 50s, deep wrinkles") e ser explícito sobre o semáforo ("red traffic light directly in front, reflecting on driver's face").</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">V2</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Segunda geração — fine-tuning</h4>
+            <p class="text-neutral-400 text-sm mb-2">Idade corrigiu. Cor do semáforo lê bem. Mas a chuva sumiu — só restou asfalto molhado.</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-emerald-400">Ajuste:</strong> adicionar "raindrops on windshield, out-of-focus bokeh of rain on glass" pra forçar o efeito visível no primeiro plano.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">V3</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Terceira geração — entrega</h4>
+            <p class="text-neutral-400 text-sm mb-2">Tudo no lugar. Chuva visível no para-brisa em bokeh, semáforo vermelho, neons cyan ao fundo, halation laranja ao redor das luzes. Capa de podcast aprovada.</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-emerald-400">Aprendizado:</strong> a V3 ficou boa porque a V1 e a V2 foram diagnósticos, não fracassos. Cada uma isolou um problema.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span>Princípio da iteração isolada</h3>
+        <p class="text-neutral-300 text-sm">Quando o seed permite (Midjourney --seed, Flux seed fixo), fixe o seed entre versões pra a única coisa que muda ser sua intervenção. Sem seed fixo, você atribui à "sorte" o que era seu prompt.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎓</span>Você terminou a Trilha 1</h2>
+        <p class="text-neutral-300 mb-6">Você sabe agora a gramática completa do prompt visual. Tem vocabulário pra dirigir lente, luz, cor, composição e estilo — e processo pra iterar com disciplina. Bora ferramentar.</p>
+
+        <div class="space-y-3 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Decifrou um briefing</strong><span class="text-neutral-400"> em blocos estruturais</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Escolheu lente narrativamente</strong><span class="text-neutral-400">, não por estética</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Mapeou luz em 4 fontes</strong><span class="text-neutral-400"> (key, fill, rim, ambient)</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Ancorou paleta + filme + referência</strong><span class="text-neutral-400"> em 3 escolhas conscientes</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Escreveu o prompt em 3 dialetos</strong><span class="text-neutral-400"> (MJ, Flux, Nano Banana)</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Iterou em V1→V2→V3</strong><span class="text-neutral-400"> trocando uma variável por vez</span></div></div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próxima Trilha:</h3>
+          <p class="text-neutral-300">Trilha 2 — Técnicas: parâmetros específicos de cada ferramenta, controle de composição (ControlNet, image-to-image) e movimento em vídeo.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Trilha 2: Técnicas →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div></footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.1 Anatomia de um prompt visual | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;}
+    .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;}
+    html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;}
+    html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;}
+    html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;}
+    html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;}
+    html:not(.dark) .border-dark-700{border-color:#e5e7eb;}
+    html:not(.dark) .text-emerald-400{color:#059669;}
+    html:not(.dark) .bg-emerald-500\/20{background-color:rgba(5,150,105,.12);}
+    html:not(.dark) .bg-emerald-500\/10{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .border-emerald-500\/30{border-color:rgba(5,150,105,.25);}
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover{background-color:rgba(5,150,105,.18);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;}
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;}
+    html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;}
+    html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;}
+    html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;}
+    html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);}
+    html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;}
+    html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;}
+    html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.1</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧬 Anatomia de um prompt visual</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">As 6 peças que todo prompt visual precisa ter — e por que a ordem importa quase tanto quanto as palavras. Quem domina essa estrutura nunca mais escreve "uma mulher bonita" e espera resultado.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Teoria+</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- 1 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🎯 Sujeito, ação e ambiente</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Toda imagem é uma <strong class="text-emerald-400">tríade</strong>: quem está na cena, o que está fazendo, e onde está. Sem esses três, o modelo improvisa — e improvisação de IA tem cara de banco de imagem dos anos 2010.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🧱</span>A regra dos 3 substantivos</h3>
+        <p class="text-neutral-300 mb-4">Antes de qualquer estilo, decora, lente ou luz, o prompt precisa responder:</p>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Sujeito</strong> — quem ou o quê (uma idosa indígena, um drone DJI, uma xícara de café)</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Ação</strong> — verbo concreto, no presente (segurando, correndo, derramando)</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Ambiente</strong> — onde, com 1-2 detalhes diferenciais (numa cozinha azulejada dos anos 70)</span></li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Prompts que funcionam</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Old fisherman <strong>repairing</strong> a green net <strong>on a wooden pier</strong> at dawn"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Teen skateboarder <strong>landing a kickflip</strong> on a <strong>cracked sidewalk</strong> in Tokyo"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Espresso <strong>being poured</strong> over ice <strong>in a brass bar</strong>"</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Prompts que não funcionam</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Beautiful woman" (sem ação, sem ambiente — modelo improvisa)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"A man standing" (verbo morto, ambiente vazio)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Coffee" (substantivo isolado — sem cena)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span>Dica prática</h3>
+        <p class="text-neutral-300">Substitua "standing", "sitting" e "posing" por verbos de ação real. "Sitting" não conta uma história; "leaning forward to whisper" conta.</p>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🎨 Estilo e meio</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O <strong class="text-emerald-400">meio</strong> é o "como" antes do "o quê". É a primeira decisão técnica do prompt e a que mais transforma o resultado. "Foto" e "ilustração" do mesmo sujeito viram universos diferentes.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🗂️</span>Meios canônicos</h3>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm text-neutral-300">
+          <div><strong class="text-emerald-400">Fotografia:</strong> editorial photo, documentary photo, street photography, fashion photo, food photo</div>
+          <div><strong class="text-emerald-400">Ilustração:</strong> editorial illustration, watercolor, gouache, ink wash, pencil sketch</div>
+          <div><strong class="text-emerald-400">3D:</strong> octane render, Unreal Engine 5, Blender cycles, isometric 3D, claymation</div>
+          <div><strong class="text-emerald-400">Anime/2D:</strong> anime cel-shading, Studio Ghibli, manga panel, ukiyo-e, motion comic</div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Exemplo bilíngue</h3>
+        <p class="text-neutral-400 text-sm mb-2">PT — Foto editorial de um chef olhando pela janela do restaurante, retrato meia-figura, luz natural macia.</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">editorial portrait photograph of a chef looking through restaurant window, half-body framing, soft natural window light, muted earth tones</code></pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">⚠️</span>Não misture meios</h3>
+        <p class="text-neutral-300 text-sm">"Photorealistic anime" ou "3D watercolor" confundem o modelo. Escolha um meio principal — se quiser híbrido, declare um e adicione "with hints of [outro]" no final.</p>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🖼️ Composição e enquadramento</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O modelo tem viés de <strong class="text-red-400">centralizar tudo</strong>. Sem instrução de composição, você sempre recebe a versão "selfie centralizada e simétrica". Composição é a diferença entre amador e diretor.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-semibold text-emerald-400 mb-3">📐 Padrões clássicos</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• <strong>Rule of thirds</strong> — sujeito em interseção das terças</li>
+            <li>• <strong>Symmetric composition</strong> — eixo central</li>
+            <li>• <strong>Leading lines</strong> — linhas guiam o olhar</li>
+            <li>• <strong>Frame within frame</strong> — janela, arco, portal</li>
+            <li>• <strong>Negative space</strong> — vazio dominante</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-semibold text-emerald-400 mb-3">🎯 Posicionamento explícito</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• subject in <strong>left third</strong></li>
+            <li>• subject in <strong>foreground</strong>, mountains in background</li>
+            <li>• <strong>extreme low-angle</strong> looking up</li>
+            <li>• <strong>over-the-shoulder</strong> POV</li>
+            <li>• <strong>top-down</strong> bird's eye view</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Exemplo bilíngue</h3>
+        <p class="text-neutral-400 text-sm mb-2">PT — Cena de café com a barista no terço esquerdo, balcão estendendo até o fundo direito como linha guia.</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">café scene, barista on the left third, polished wooden counter as leading line extending to background right, rule of thirds composition</code></pre>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">💡 Iluminação em uma frase</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Luz é o que separa <strong class="text-emerald-400">"imagem renderizada" de "imagem fotografada"</strong>. Use termos canônicos — modelos foram treinados em milhões de imagens com descritores de luz. As palavras certas ativam o conhecimento certo.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">☀️ Descritores prontos por mood</h3>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm">
+          <div><strong class="text-emerald-400">Quente / dourado:</strong> <span class="text-neutral-300">golden hour, magic hour, warm tungsten, candlelight, firelight</span></div>
+          <div><strong class="text-emerald-400">Frio / azulado:</strong> <span class="text-neutral-300">blue hour, moonlight, fluorescent, screen glow, cold rim light</span></div>
+          <div><strong class="text-emerald-400">Dramático:</strong> <span class="text-neutral-300">single key light, Rembrandt lighting, chiaroscuro, top light Caravaggio</span></div>
+          <div><strong class="text-emerald-400">Suave / publicitário:</strong> <span class="text-neutral-300">soft box, overcast diffuse, ring light, butterfly lighting</span></div>
+          <div><strong class="text-emerald-400">Urbano noturno:</strong> <span class="text-neutral-300">neon spill, sodium street lamps, practical lights, mixed color temperature</span></div>
+          <div><strong class="text-emerald-400">Natural realista:</strong> <span class="text-neutral-300">window light, dappled forest light, hard noon sun, harsh shadows</span></div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span>Dica de combo</h3>
+        <p class="text-neutral-300 text-sm">Dois descritores de luz funcionam melhor que um. Ex: <em>"golden hour backlight + soft fill"</em> dá direção (atrás) + qualidade (preenche o rosto). Um sozinho deixa muita coisa aberta.</p>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🎨 Paleta de cor e mood</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Cor é <strong class="text-emerald-400">emoção codificada</strong>. Declarar paleta dá coesão — é o que faz uma série de imagens parecer da mesma campanha em vez de aleatórias.</p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">🎨 Combos de paleta prontos</h3>
+        <div class="space-y-3 text-sm text-neutral-300">
+          <div><strong class="text-emerald-400">Teal & orange</strong> — blockbuster Hollywood, ação, ficção científica</div>
+          <div><strong class="text-emerald-400">Monochromatic blue</strong> — drama, melancolia, futuro frio</div>
+          <div><strong class="text-emerald-400">Warm earth tones</strong> — documentário, autoral, intimismo</div>
+          <div><strong class="text-emerald-400">Pastel candy</strong> — Wes Anderson, infantil, nostálgico</div>
+          <div><strong class="text-emerald-400">High contrast black & red</strong> — thriller, marca forte, agressividade</div>
+          <div><strong class="text-emerald-400">Sepia warm</strong> — período, memória, atemporal</div>
+          <div><strong class="text-emerald-400">Neon cyberpunk</strong> — magenta + cyan, urbano noturno futurista</div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Exemplo bilíngue</h3>
+        <p class="text-neutral-400 text-sm mb-2">PT — Garota olhando pela janela do ônibus, paleta de tons quentes da terra, mood melancólico e nostálgico.</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">teenage girl staring through bus window, warm earth tone palette (ochre, rust, faded green), melancholic nostalgic mood</code></pre>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">⚖️ Ordem das palavras importa</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Modelos atuais ainda têm <strong class="text-emerald-400">viés posicional</strong>: palavras no início pesam mais. Saber ordenar é saber priorizar.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">📋 Ordem padrão recomendada</h3>
+        <ol class="space-y-2 text-neutral-300 text-sm list-decimal pl-5">
+          <li><strong>Meio</strong> (foto, ilustração, render)</li>
+          <li><strong>Sujeito</strong> + ação + ambiente</li>
+          <li><strong>Lente / câmera</strong> (35mm, low angle, medium shot)</li>
+          <li><strong>Luz</strong> (golden hour, soft box, rim light)</li>
+          <li><strong>Composição</strong> (rule of thirds, leading lines)</li>
+          <li><strong>Paleta / estoque</strong> (teal & orange, Kodak Portra)</li>
+          <li><strong>Estilo / referência</strong> (Wes Anderson, editorial Vogue)</li>
+          <li><strong>Qualidade / técnicos</strong> (8k, sharp, film grain) — no final ou em parâmetro próprio</li>
+        </ol>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Prompt-modelo completo (bilíngue)</h3>
+        <p class="text-neutral-400 text-sm mb-3">Cena: barista servindo café numa cafeteria de São Paulo, luz da janela, foto editorial.</p>
+        <p class="text-neutral-400 text-xs mb-1">PT (briefing):</p>
+        <p class="text-neutral-300 text-sm mb-3 italic">Foto editorial de uma barista jovem servindo café num balcão de mármore. Cafeteria em São Paulo, manhã. Lente 50mm, profundidade rasa. Luz natural da janela à esquerda. Composição na regra dos terços, barista no terço direito. Paleta terra quente. Estilo editorial Kinfolk, filme Kodak Portra 400, grão sutil.</p>
+        <p class="text-neutral-400 text-xs mb-1">EN (prompt):</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">editorial photograph of a young barista pouring espresso onto a marble counter, São Paulo café morning, 50mm lens shallow depth of field, soft window light from the left, rule of thirds composition with barista on right third, warm earth tone palette, Kinfolk editorial style, Kodak Portra 400 film grain, subtle halation</code></pre>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span>Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Tríade sujeito/ação/ambiente</strong><span class="text-neutral-400"> — esqueleto de toda cena</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Meio declarado primeiro</strong><span class="text-neutral-400"> — foto, ilustração, 3D, anime mudam tudo</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Composição explícita</strong><span class="text-neutral-400"> — sem ela, modelo centraliza tudo</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Luz com termos canônicos</strong><span class="text-neutral-400"> — golden hour, soft box, rim light</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Paleta + mood ancoram a emoção</strong><span class="text-neutral-400"> — sem isso, cores aleatórias</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Ordem hierárquica</strong><span class="text-neutral-400"> — meio → sujeito → câmera → luz → composição → paleta → estilo</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">1.2 — Linguagem fotográfica (lentes, abertura, ISO, luz, ângulos)</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+          <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Prompt Director · INEMA.CLUB · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle');
+    const dIcon=document.getElementById('theme-toggle-dark-icon');
+    const lIcon=document.getElementById('theme-toggle-light-icon');
+    const html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}
+    else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

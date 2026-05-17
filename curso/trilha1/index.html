@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 1 — Fundamentos | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:border-emerald-500\/30:hover { border-color: rgba(5, 150, 105, 0.25); }
+
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🎬</span>
+            <span class="font-bold text-lg hidden sm:inline">Prompt Director</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER TRILHA -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">TRILHA 1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🟢 Fundamentos</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">A gramática do prompt visual. Aqui você aprende as palavras certas pra falar com o modelo: sujeito, lente, luz, composição, cor. Sem isso, todo prompt vira loteria.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">5</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">30</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~4h</div><div class="text-xs text-neutral-400">Duração</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- NAV RÁPIDA -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="#modulo-1-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.1</span><span class="text-xs text-neutral-500">~40 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🧬 Anatomia de um prompt</h3>
+          <p class="text-xs text-neutral-400">Sujeito, estilo, composição, luz, cor, ordem</p>
+        </a>
+        <a href="#modulo-1-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">📷 Linguagem fotográfica</h3>
+          <p class="text-xs text-neutral-400">Lentes, DOF, ISO, luz, ângulo, distância</p>
+        </a>
+        <a href="#modulo-1-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🎞️ Linguagem cinematográfica</h3>
+          <p class="text-xs text-neutral-400">Aspect, grading, diretores, filme, negativos</p>
+        </a>
+        <a href="#modulo-1-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.4</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🏋️ Exercícios práticos</h3>
+          <p class="text-xs text-neutral-400">6 desafios pra fixar tudo</p>
+        </a>
+        <a href="#modulo-1-5" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.5</span><span class="text-xs text-neutral-500">~40 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🗺️ Passo-a-passo</h3>
+          <p class="text-xs text-neutral-400">Seu primeiro still cinematográfico</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- DIVISOR -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-2">Conteúdo detalhado</h2>
+      <p class="text-neutral-400">Clique nos tópicos pra abrir o resumo. Pra ver tudo, abra a página completa do módulo.</p>
+    </div>
+
+    <!-- MÓDULO 1.1 -->
+    <div id="modulo-1-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.1</span><span class="text-xs text-neutral-500">~40 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🧬 Anatomia de um prompt visual</h3>
+        <p class="text-neutral-400 text-sm">As 6 peças que todo prompt visual precisa ter — e por que a ordem importa quase tanto quanto as palavras.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Sujeito, ação e ambiente</span><span class="text-neutral-500 text-sm ml-2">- o esqueleto de qualquer cena</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A tríade fundamental — quem (sujeito), fazendo o que (ação), onde (ambiente). Sem esses três, o modelo improvisa e você vira refém do estilo padrão dele.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">90% dos prompts ruins falham aqui: descrevem só o sujeito ("uma mulher bonita") e deixam ação/ambiente em branco. O resultado é genérico porque o briefing foi genérico.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sujeito específico · verbo de ação concreto (não "estando", e sim "correndo/segurando/olhando") · ambiente com 1-2 detalhes diferenciais.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🎨</span>
+            <div><span class="font-medium">Estilo e meio</span><span class="text-neutral-500 text-sm ml-2">- foto, ilustração, 3D, anime</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A declaração do meio visual: fotografia, pintura a óleo, render 3D, anime cel-shading, aquarela, gravura. Define todo o "como" antes de o "o quê".</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o parâmetro que mais muda o resultado. "Foto" e "ilustração" do mesmo sujeito viram universos diferentes. Sem declarar, o modelo escolhe o que viu mais nos dados de treino.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Comece o prompt com o meio · evite misturar meios na mesma frase · combine meio + sub-estilo (ex: "foto editorial", "ilustração editorial").</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🖼️</span>
+            <div><span class="font-medium">Composição e enquadramento</span><span class="text-neutral-500 text-sm ml-2">- regra dos terços, simetria, fluxo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Onde os elementos ficam no quadro: centralizado, regra dos terços, simetria perfeita, off-center, leading lines, frame-within-frame.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O modelo tem viés de centralizar tudo. Sem instrução de composição, você sempre recebe a versão "selfie centralizada". Composição é o que tira o prompt do amador.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Use termos canônicos ("rule of thirds", "symmetric composition", "leading lines") · indique onde o sujeito está no quadro (left third, center, foreground/background).</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">💡</span>
+            <div><span class="font-medium">Iluminação em uma frase</span><span class="text-neutral-500 text-sm ml-2">- golden hour, soft box, neon</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um descritor de luz curto e canônico que define direção, qualidade e cor da iluminação — antes de qualquer ajuste técnico.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Luz é o que separa "imagem renderizada" de "imagem fotografada". Modelos foram treinados em milhões de imagens com descritores de luz — usá-los ativa o conhecimento certo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Termos prontos: golden hour, blue hour, hard noon sun, overcast soft light, soft box, rim light, neon spill, candlelight, moonlight.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🎨</span>
+            <div><span class="font-medium">Paleta de cor e mood</span><span class="text-neutral-500 text-sm ml-2">- a emoção entra pela cor</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A escolha consciente de 2-3 cores dominantes e um adjetivo de mood (melancólico, vibrante, sereno, ameaçador) que guia a emoção da cena.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem paleta declarada, o modelo joga todas as cores. Declarar paleta dá coesão e identidade — é o que faz uma série de imagens parecer da mesma campanha.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Combos prontos: teal & orange, monochromatic blue, warm earth tones, pastel candy, high-contrast black & red · sempre + 1 adjetivo de mood.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">⚖️</span>
+            <div><span class="font-medium">Ordem das palavras importa</span><span class="text-neutral-500 text-sm ml-2">- peso de tokens na prática</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A regra prática: palavras no início do prompt pesam mais. O modelo presta mais atenção nos primeiros tokens — então a ordem é hierárquica, não estética.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dois prompts com as mesmas palavras em ordens diferentes geram imagens diferentes. Saber ordenar é como saber priorizar num briefing.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Ordem padrão: meio → sujeito → ação → ambiente → luz → composição → estilo/paleta → técnicos · negativos ao final ou em parâmetro próprio.</p></div>
+          </div></div>
+        </div>
+
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-1-1.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1.2 -->
+    <div id="modulo-1-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.2</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">📷 Linguagem fotográfica</h3>
+        <p class="text-neutral-400 text-sm">O vocabulário do fotógrafo virado parâmetros de prompt. Lente, abertura, ISO, luz, ângulo, distância.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🔭</span>
+            <div><span class="font-medium">Tipos de lente</span><span class="text-neutral-500 text-sm ml-2">- 24mm a 200mm e anamórfica</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A distância focal da lente. Define o quanto de cena cabe no quadro e como o espaço é distorcido — grande angular exagera profundidade, teleobjetiva comprime tudo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dizer "shot on 35mm" muda mais a imagem do que mudar a pessoa fotografada. Cada lente carrega uma psicologia: 24mm é imersivo, 85mm é íntimo, 200mm é voyeurístico.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">24mm wide · 35mm humano natural · 50mm clássico · 85mm retrato · 135mm cinema · anamórfica 2.39:1 · macro · fisheye.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🌗</span>
+            <div><span class="font-medium">Abertura e DOF</span><span class="text-neutral-500 text-sm ml-2">- f/1.4 vs f/8, bokeh, foco</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Quanto da imagem fica em foco. f/1.4 isola o sujeito com fundo desfocado (bokeh); f/8 entrega tudo nítido do primeiro plano ao fundo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o segundo parâmetro mais "fotográfico". Resolve por si só a leitura visual: profundidade rasa diz "olhe aqui", profundidade ampla diz "absorva tudo".</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Shallow depth of field · creamy bokeh · subject isolation · deep focus · everything in focus · split focus · tilt-shift.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🎞️</span>
+            <div><span class="font-medium">ISO, grão e textura de filme</span><span class="text-neutral-500 text-sm ml-2">- da pureza digital ao analógico</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A textura granular que diferencia filme de digital. ISO baixo = limpo; ISO alto + filme = grão visível, ruído orgânico, sensação de presença.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">"Limpo demais" é a marca registrada de imagem de IA mal escrita. Grão e textura quebram esse efeito de plástico e empurram o resultado pra "fotografia real".</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Film grain · Kodak Portra 400 · Cinestill 800T · ISO 1600 · push-processed · halation · soft analog texture.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">💡</span>
+            <div><span class="font-medium">Tipos de luz</span><span class="text-neutral-500 text-sm ml-2">- direção, qualidade, temperatura</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Três eixos pra descrever qualquer luz: direção (frontal, lateral, contraluz, top), qualidade (dura/macia) e temperatura (quente/fria).</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Profissionais não dizem "luz boa", eles especificam. Com 3 palavras certas você comunica mais sobre clima do que com 30 adjetivos genéricos.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Hard light · soft box · rim light · backlight · top light Caravaggio · split light · Rembrandt light · neon spill · practical lights.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📐</span>
+            <div><span class="font-medium">Ângulos de câmera</span><span class="text-neutral-500 text-sm ml-2">- low, dutch, overhead, eye-level</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A posição da câmera em relação ao sujeito. Cada ângulo carrega significado: low angle = poder, high angle = vulnerabilidade, dutch angle = instabilidade.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ângulo é narrativa. Sem declarar, o modelo escolhe eye-level genérico — você abandona uma das ferramentas mais expressivas do quadro.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Low angle hero shot · high angle · top-down/bird's eye · dutch tilt · eye-level · over-the-shoulder · POV first person.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🔍</span>
+            <div><span class="font-medium">Distâncias e enquadramentos</span><span class="text-neutral-500 text-sm ml-2">- close-up a extreme wide</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O quanto do sujeito aparece no quadro: extreme close-up (só olhos), close-up (rosto), medium (cintura), wide (corpo + ambiente), extreme wide (paisagem).</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É como você dirige a leitura emocional. Close-up = intimidade. Wide = isolamento ou grandiosidade. Sem isso o modelo entrega medium genérico.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Extreme close-up · close-up · medium shot · cowboy shot · full body · wide shot · extreme wide · establishing shot.</p></div>
+          </div></div>
+        </div>
+
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-1-2.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1.3 -->
+    <div id="modulo-1-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🎞️ Linguagem cinematográfica</h3>
+        <p class="text-neutral-400 text-sm">Do still pro cinema. Aspect ratio, color grading, diretores de referência, estoques de filme, halation e negative prompts.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">📺</span>
+            <div><span class="font-medium">Aspect ratio</span><span class="text-neutral-500 text-sm ml-2">- 2.39:1, 16:9, 4:3, 9:16</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A proporção do quadro. 2.39:1 é cinema anamórfico, 16:9 é TV/YouTube, 4:3 é nostálgico/vintage, 9:16 é Reels/Shorts/Stories.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Aspect ratio sozinho já comunica "tipo de coisa". 2.39:1 ativa o cérebro pra modo cinema antes mesmo da imagem ser interpretada.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cinematic 2.39:1 widescreen · academy 1.85:1 · standard 16:9 · vintage 4:3 · vertical 9:16 social.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🎨</span>
+            <div><span class="font-medium">Color grading</span><span class="text-neutral-500 text-sm ml-2">- teal & orange, bleach bypass</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A "color science" que define a paleta final do filme. Não é só cor — é a relação entre sombras, meios-tons e altas luzes em cada canal.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada nome de grading carrega décadas de cinema: "teal & orange" é blockbuster americano; "bleach bypass" é Saving Private Ryan; "Kodachrome warm" é nostalgia.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Teal & orange · bleach bypass · cross-processed · ENR · sepia warm · cold desaturated · Wes Anderson pastel · Fincher green-yellow.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🎬</span>
+            <div><span class="font-medium">Diretores e DPs de referência</span><span class="text-neutral-500 text-sm ml-2">- atalhos de estilo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Nomes-âncora que codificam um pacote inteiro de decisões visuais. "Roger Deakins" = luz natural exagerada, silhuetas, paleta restrita.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o atalho mais poderoso do prompt. Uma referência boa substitui 5 linhas de descrição técnica — desde que o modelo conheça o estilo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Roger Deakins · Emmanuel Lubezki · Christopher Doyle · Wes Anderson · Denis Villeneuve · David Fincher · Wong Kar-wai · Greig Fraser.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🎞️</span>
+            <div><span class="font-medium">Estoques de filme</span><span class="text-neutral-500 text-sm ml-2">- Portra, Cinestill, Vision3</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Marcas e códigos de filme analógico que carregam ciência de cor própria: tons de pele, contraste, grão e resposta à luz característicos.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Citar um estoque entrega 80% do "look" de uma vez. "Kodak Portra 400" sozinho já faz tons de pele cremosos e cor levemente desaturada.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Kodak Portra 400 · Cinestill 800T · Kodak Vision3 500T · Fujifilm Velvia · Ilford HP5 (P&B) · Ektachrome · Polaroid SX-70.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">✨</span>
+            <div><span class="font-medium">Halation, bloom e lens flare</span><span class="text-neutral-500 text-sm ml-2">- o "real" no digital</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Três defeitos felizes: halation é o halo laranja em luzes brilhantes (filme), bloom é o brilho difuso geral, lens flare é o reflexo da lente.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">São as "imperfeições" que o cérebro lê como autêntico. Sem eles, a imagem fica clinicamente perfeita — o que é a marca de IA mal direcionada.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Subtle halation · anamorphic lens flare · soft bloom · highlight glow · chromatic aberration · light leaks.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🚫</span>
+            <div><span class="font-medium">Negative prompts</span><span class="text-neutral-500 text-sm ml-2">- o que tirar da cena</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A lista do que o modelo deve EVITAR. Disponível como campo separado em SD/Flux, ou via "--no" em Midjourney. Pra modelos sem campo, usar prompt limpo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Resolve 80% dos problemas crônicos: dedos extras, watermark, baixa qualidade, texto borrado, cores saturadas demais.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">--no text, watermark, blurry, low quality, extra fingers, deformed, oversaturated, plastic, cartoon (em foto realista).</p></div>
+          </div></div>
+        </div>
+
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-1-3.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1.4 EXERCÍCIOS -->
+    <div id="modulo-1-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.4</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🏋️ Exercícios práticos</h3>
+        <p class="text-neutral-400 text-sm">Seis desafios pra fixar o que aprendeu. Cada um traz briefing, critério de "feito" e prompt-resposta esperado (oculto pra não dar de bandeja).</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Desafio 1 — Reescreva um prompt ruim</span><span class="text-neutral-500 text-sm ml-2">- da poça pro briefing</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Você recebe "a beautiful woman" e tem 5 minutos pra transformar em prompt completo aplicando os 6 elementos do módulo 1.1.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o exercício de campo mais real: 90% dos prompts que você vai receber de cliente vão começar assim. Treinar a reescrita vira reflexo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Critério de feito: o prompt final tem meio + sujeito específico + ação + ambiente + luz + composição + paleta + estilo.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🔭</span>
+            <div><span class="font-medium">Desafio 2 — Mesma cena, 3 lentes</span><span class="text-neutral-500 text-sm ml-2">- 24mm, 50mm, 135mm</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Escolha uma cena (ex: barista atrás do balcão), escreva 3 prompts idênticos mudando só a lente, gere e compare.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Treina o olho a perceber o efeito real da focal — não é teoria, é diferença visual sentada na mesa.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Critério de feito: você consegue explicar em uma frase por que cada lente conta uma história diferente da mesma cena.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">💡</span>
+            <div><span class="font-medium">Desafio 3 — Luz reconta a história</span><span class="text-neutral-500 text-sm ml-2">- 4 luzes na mesma cena</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Personagem solo em um quarto. Gere 4 versões: golden hour pela janela, top light Caravaggio, neon roxo e blue hour com luz prática.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mostra na pele que luz não é decoração — é narrativa. A mesma pessoa vira 4 personagens com 4 tipos de luz.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Critério de feito: cada uma das 4 imagens evoca um gênero diferente (romance, thriller, sci-fi, drama).</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🎬</span>
+            <div><span class="font-medium">Desafio 4 — Imitação de diretor</span><span class="text-neutral-500 text-sm ml-2">- mesma cena, 3 estilos</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Café da manhã num diner. Gere em Wes Anderson, depois Fincher, depois Wong Kar-wai. Sem mudar a cena, só o pacote estilístico.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Você prova pra si mesmo que referências de diretor são atalhos densos. Aprende quais funcionam bem em qual modelo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Critério de feito: as 3 imagens são reconhecíveis como cada estilo sem você precisar legendar qual é qual.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🎞️</span>
+            <div><span class="font-medium">Desafio 5 — Quebrar o "plástico de IA"</span><span class="text-neutral-500 text-sm ml-2">- de digital limpo a filme</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gere uma imagem propositalmente "limpa demais" (sem grão, sem halation). Depois adicione descritores até parecer filme real.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender o "pior" pra entender o "melhor". Você ganha radar pra perceber a marca de IA mal direcionada em qualquer imagem.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Critério de feito: na 3ª versão, alguém olha sem contexto e não diz "isso é IA" de cara.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">📐</span>
+            <div><span class="font-medium">Desafio 6 — Sua "cena assinatura"</span><span class="text-neutral-500 text-sm ml-2">- prompt-padrão pessoal</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Crie UMA cena que vai ser sua "régua" — aquela que você roda sempre que quiser comparar ferramenta, modelo ou ajuste.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Profissional sério tem um prompt-padrão. Sem isso você fica comparando coisas diferentes e nunca consegue julgar evolução.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Critério de feito: você roda o mesmo prompt em 3 ferramentas e consegue defender qual ficou melhor com argumentos visuais.</p></div>
+          </div></div>
+        </div>
+
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-1-4.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1.5 PASSO-A-PASSO -->
+    <div id="modulo-1-5" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.5</span><span class="text-xs text-neutral-500">~40 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🗺️ Passo-a-passo: seu primeiro still cinematográfico</h3>
+        <p class="text-neutral-400 text-sm">Caminhada guiada do zero ao resultado. Pegamos um briefing real e construímos o prompt camada por camada, aplicando tudo da trilha.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">📋</span>
+            <div><span class="font-medium">Passo 1 — Decifrar o briefing</span><span class="text-neutral-500 text-sm ml-2">- do verbal pro estrutural</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Briefing inicial: "Foto cinematográfica de um motorista de táxi em São Paulo, noite chuvosa." Quebramos em sujeito/ambiente/mood explícitos.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A maior parte do trabalho não é "escrever o prompt", é entender o que o briefing está pedindo de verdade. Aqui você treina esse músculo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Identificar: sujeito (motorista), idade/contexto (40s, cansado), ambiente (táxi parado, semáforo, chuva), mood (solitário, cinematográfico).</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">📷</span>
+            <div><span class="font-medium">Passo 2 — Escolher lente e enquadramento</span><span class="text-neutral-500 text-sm ml-2">- a câmera entra na cena</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Pra solidão, escolhemos 85mm (compressão íntima) e medium close-up através do para-brisa, com profundidade rasa pra borrar a chuva.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Decisão visual narrativa, não técnica. A lente foi escolhida pelo que conta sobre o personagem, não pelo "qual é mais bonita".</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Lente: 85mm · enquadramento: medium close-up · profundidade: shallow (f/1.8) · ponto de vista: através do para-brisa.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">💡</span>
+            <div><span class="font-medium">Passo 3 — Desenhar a luz</span><span class="text-neutral-500 text-sm ml-2">- semáforo + neon + faróis</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Luz prática: semáforo vermelho como key light no rosto, neons azuis da rua atrás, faróis de outro carro vindo de frente como rim light.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cena de noite urbana não é "escura" — é cheia de fontes pontuais. Mapear cada fonte é como o DP pensa, não como o amador pensa.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Practical lights · key (semáforo vermelho) · fill (neon azul) · rim (faróis) · ambient (chuva refletindo asfalto).</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🎨</span>
+            <div><span class="font-medium">Passo 4 — Paleta e referência</span><span class="text-neutral-500 text-sm ml-2">- ancorar o look</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Paleta: vermelho saturado + azul cyan + sombras pretas (alta saturação, alto contraste). Referência: estética de Wong Kar-wai meets Taxi Driver.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem ancoragem em referência, o modelo escolhe sozinho. Com ancoragem, você dirige o estilo com 2 palavras-âncora densas.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Paleta: red + cyan + black · estoque: Cinestill 800T (clássico para neon noturno) · ref: Wong Kar-wai, Taxi Driver mood.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📝</span>
+            <div><span class="font-medium">Passo 5 — Montar o prompt final</span><span class="text-neutral-500 text-sm ml-2">- na ordem que pesa</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Juntamos tudo na ordem hierárquica: meio → sujeito → ação → ambiente → luz → composição → paleta/estoque → técnicos. Aplicação direta do 1.1.6.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Você vê na prática como cada bloco entra. Mesmo que esqueça nomes técnicos, lembra da estrutura.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Prompt final fica visível no módulo completo — em PT e EN, com variações pra cada ferramenta principal.</p></div>
+          </div></div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🔁</span>
+            <div><span class="font-medium">Passo 6 — Iterar e refinar</span><span class="text-neutral-500 text-sm ml-2">- o resultado é a 3ª tentativa</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Geramos, olhamos o que falhou, ajustamos UMA variável por vez. Se o motorista saiu jovem demais, só esse campo muda. Não reescreve tudo.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Iniciante reescreve tudo a cada erro. Profissional muda 1 variável e isola a causa. Esse hábito triplica a velocidade.</p></div>
+            <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Iteração isolada · seed fixo pra comparar mudanças · log do que mudou em cada versão · critério visual de "feito".</p></div>
+          </div></div>
+        </div>
+
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-1-5.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- NAV FIM -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para início</a>
+      <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Trilha 2: Técnicas →</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Prompt Director · INEMA.CLUB · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const dIcon = document.getElementById('theme-toggle-dark-icon');
+    const lIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') { html.classList.remove('dark'); dIcon.classList.remove('hidden'); }
+    else { lIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      dIcon.classList.toggle('hidden'); lIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

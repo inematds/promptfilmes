@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.2 Linguagem fotográfica | Prompt Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Inter',sans-serif;} .dark body{background-color:#111827;}
+    pre,code.mono{font-family:'JetBrains Mono',monospace;}
+    html:not(.dark) body{background-color:#f8fafc;}
+    html:not(.dark) .bg-dark-900{background-color:#fff;} html:not(.dark) .bg-dark-800{background-color:#f9fafb;}
+    html:not(.dark) .bg-dark-700{background-color:#f3f4f6;} html:not(.dark) .bg-dark-600{background-color:#e5e7eb;}
+    html:not(.dark) .text-neutral-100{color:#111827;} html:not(.dark) .text-neutral-300{color:#4b5563;}
+    html:not(.dark) .text-neutral-400{color:#6b7280;} html:not(.dark) .text-neutral-500{color:#9ca3af;}
+    html:not(.dark) .border-dark-600{border-color:#d1d5db;} html:not(.dark) .border-dark-700{border-color:#e5e7eb;}
+    html:not(.dark) .text-emerald-400{color:#059669;}
+    html:not(.dark) .bg-emerald-500\/20{background-color:rgba(5,150,105,.12);}
+    html:not(.dark) .bg-emerald-500\/10{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .border-emerald-500\/30{border-color:rgba(5,150,105,.25);}
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover{background-color:rgba(5,150,105,.18);}
+    html:not(.dark) .hover\:text-emerald-400:hover{color:#059669;} html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08);}
+    html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb;} html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08);}
+    html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed;} html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08);}
+    html:not(.dark) .hover\:text-amber-400:hover{color:#92400e;} html:not(.dark) .hover\:bg-amber-500\/10:hover{background-color:rgba(217,119,6,.08);}
+    html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important;}
+    html:not(.dark) .text-primary{color:#a16207;} html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08);}
+    html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25);} html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25);}
+    html:not(.dark) .text-sky-400{color:#0369a1;} html:not(.dark) .text-yellow-400{color:#a16207;}
+    html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7;} html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e;}
+    html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95);}
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+      <div class="flex items-center space-x-4">
+        <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎬</span><span class="font-bold text-lg hidden sm:inline">Prompt Director</span></a>
+        <span class="text-neutral-600">|</span>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+      </div>
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+        <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span></a>
+        <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+        <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span></a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+    </div></div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.2</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📷 Linguagem fotográfica</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">O vocabulário do fotógrafo virado parâmetro de prompt. Quem domina lente, abertura, ISO, luz, ângulo e distância tem 80% do "look" de uma foto sob controle.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Teoria+</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- 1 LENTES -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🔭 Tipos de lente</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Distância focal define <strong class="text-emerald-400">quanto cabe no quadro</strong> e <strong class="text-emerald-400">como o espaço é distorcido</strong>. Dizer "shot on 35mm" muda mais a imagem do que mudar a pessoa fotografada.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">📋 Guia rápido de focais</h3>
+        <div class="grid sm:grid-cols-2 gap-3 text-sm text-neutral-300">
+          <div><strong class="text-emerald-400">14-24mm wide:</strong> imersivo, distorce, paisagem, arquitetura</div>
+          <div><strong class="text-emerald-400">35mm:</strong> humano natural, documentário, street</div>
+          <div><strong class="text-emerald-400">50mm:</strong> "lente nifty", clássico universal, neutro</div>
+          <div><strong class="text-emerald-400">85mm:</strong> retrato, comprime, isolamento íntimo</div>
+          <div><strong class="text-emerald-400">135mm:</strong> cinema, comprime fundo, dramático</div>
+          <div><strong class="text-emerald-400">200mm+:</strong> teleobjetiva, voyeur, esporte, fauna</div>
+          <div><strong class="text-emerald-400">Anamórfica:</strong> 2.39:1, oval bokeh, lens flares horizontais</div>
+          <div><strong class="text-emerald-400">Macro / fisheye:</strong> casos específicos, alto impacto visual</div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Exemplo bilíngue — mesma cena, 3 lentes</h3>
+        <p class="text-neutral-400 text-sm mb-2">PT — Casal na varanda de um café, mesa pequena entre eles, copos com cerveja.</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto mb-2"><code class="mono">couple on a café terrace with two beer glasses, shot on 24mm wide, immersive perspective, both subjects and full surroundings visible</code></pre>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto mb-2"><code class="mono">couple on a café terrace, shot on 50mm, natural human perspective, balanced framing</code></pre>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">couple on a café terrace, shot on 135mm telephoto, compressed background blur, intimate detail of their hands</code></pre>
+      </div>
+    </section>
+
+    <!-- 2 ABERTURA -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🌗 Abertura e profundidade de campo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Quanto da imagem fica em foco. <strong class="text-emerald-400">f/1.4</strong> isola o sujeito com fundo cremoso (bokeh); <strong class="text-emerald-400">f/8 ou f/11</strong> entrega tudo nítido — usado em paisagem e arquitetura.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">Profundidade rasa (f/1.2 - f/2.8)</h4>
+          <p class="text-neutral-300 text-sm mb-3">Sujeito isolado, fundo borrado. Para retrato, produto e plano fechado.</p>
+          <p class="text-neutral-400 text-xs mb-1">Descritores:</p>
+          <p class="text-neutral-300 text-sm">"shallow depth of field", "f/1.4 bokeh", "creamy background blur", "subject isolation"</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">Profundidade ampla (f/8 - f/16)</h4>
+          <p class="text-neutral-300 text-sm mb-3">Tudo nítido, primeiro plano ao fundo. Paisagem, arquitetura, grupo.</p>
+          <p class="text-neutral-400 text-xs mb-1">Descritores:</p>
+          <p class="text-neutral-300 text-sm">"deep focus", "f/11 everything in focus", "hyperfocal", "sharp foreground and background"</p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span>Dica narrativa</h3>
+        <p class="text-neutral-300 text-sm">Profundidade rasa diz "olhe aqui". Profundidade ampla diz "absorva tudo". Essa é a decisão narrativa — não a estética.</p>
+      </div>
+    </section>
+
+    <!-- 3 ISO/GRAO -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🎞️ ISO, grão e textura de filme</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">"Limpo demais" é a assinatura da IA mal direcionada. <strong class="text-emerald-400">Grão e textura</strong> quebram esse efeito plástico.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">📋 Descritores prontos</h3>
+        <div class="space-y-2 text-sm text-neutral-300">
+          <div>• "subtle film grain" — grão sutil, mais coesão</div>
+          <div>• "heavy 35mm grain, pushed ISO 1600" — grão visível, vibe analógica</div>
+          <div>• "Kodak Portra 400 grain" — grão característico, tons de pele cremosos</div>
+          <div>• "Cinestill 800T halation" — grão + halo laranja em luzes brilhantes (noite urbana)</div>
+          <div>• "Ilford HP5 push" — preto e branco, alto contraste, granulado</div>
+          <div>• "soft analog texture" — textura genérica sem citar marca</div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Exemplo bilíngue</h3>
+        <p class="text-neutral-400 text-sm mb-2">PT — Retrato noturno na rua, neons, grão de Cinestill 800T com halation laranja característica.</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">night street portrait, neon signs reflecting on wet asphalt, shot on Cinestill 800T film, characteristic orange halation around light sources, visible grain texture</code></pre>
+      </div>
+    </section>
+
+    <!-- 4 TIPOS DE LUZ -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">💡 Tipos de luz</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Três eixos: <strong class="text-emerald-400">direção</strong>, <strong class="text-emerald-400">qualidade</strong> e <strong class="text-emerald-400">temperatura</strong>. Profissional não diz "luz boa" — especifica os três.</p>
+
+      <div class="grid sm:grid-cols-3 gap-4 mb-6 text-sm">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-emerald-400 mb-2">Direção</h4>
+          <ul class="space-y-1 text-neutral-300">
+            <li>• front light</li><li>• side / split light</li>
+            <li>• backlight / contre-jour</li><li>• rim / kicker</li>
+            <li>• top light (Caravaggio)</li><li>• underlight</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-emerald-400 mb-2">Qualidade</h4>
+          <ul class="space-y-1 text-neutral-300">
+            <li>• hard light (sombras duras)</li><li>• soft box / diffused</li>
+            <li>• overcast diffuse</li><li>• window light</li>
+            <li>• dappled (filtrada)</li><li>• chiaroscuro</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold text-emerald-400 mb-2">Temperatura</h4>
+          <ul class="space-y-1 text-neutral-300">
+            <li>• golden hour (~3200K)</li><li>• tungsten warm (~3000K)</li>
+            <li>• daylight neutral (~5500K)</li><li>• overcast cool (~6500K)</li>
+            <li>• blue hour (~8000K)</li><li>• mixed temperature</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span>Combo de luz cinematográfica</h3>
+        <p class="text-neutral-300 text-sm">"Key light from window + cool blue rim from back" entrega instantaneamente um look de cinema. Duas fontes com cores diferentes = leitura visual rica.</p>
+      </div>
+    </section>
+
+    <!-- 5 ANGULOS -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📐 Ângulos de câmera</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Ângulo é <strong class="text-emerald-400">narrativa</strong>. Eye-level é neutro (e padrão do modelo). Os outros carregam significado psicológico.</p>
+
+      <div class="grid sm:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-semibold text-emerald-400 mb-3">Ângulos e o que comunicam</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li><strong>Eye-level:</strong> neutro, conversacional</li>
+            <li><strong>Low angle:</strong> herói, poder, ameaça</li>
+            <li><strong>High angle:</strong> vulnerabilidade, visão geral</li>
+            <li><strong>Top-down / bird's eye:</strong> visão de Deus, mapa</li>
+            <li><strong>Dutch tilt:</strong> instabilidade, tensão</li>
+            <li><strong>Over the shoulder:</strong> diálogo, perspectiva</li>
+            <li><strong>POV first person:</strong> imersão, subjetivo</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-semibold text-emerald-400 mb-3">📋 Exemplo bilíngue</h4>
+          <p class="text-neutral-400 text-sm mb-2">PT — Garoto em frente a um prédio enorme, ângulo baixíssimo, prédio se erguendo, sensação de pequenez.</p>
+          <pre class="bg-dark-900 rounded-lg p-4 text-xs text-emerald-400 overflow-x-auto"><code class="mono">young boy in front of a massive brutalist building, extreme low-angle looking up, building towering overhead, sense of awe and smallness</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 DISTANCIAS -->
+    <section class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🔍 Distâncias e enquadramentos</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">É como você dirige a <strong class="text-emerald-400">leitura emocional</strong>. Close-up = intimidade. Wide = isolamento ou grandiosidade.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">📏 Escala de planos</h3>
+        <div class="space-y-3 text-sm text-neutral-300">
+          <div><strong class="text-emerald-400">Extreme close-up (ECU):</strong> detalhe — olho, mão, objeto. Tensão.</div>
+          <div><strong class="text-emerald-400">Close-up (CU):</strong> rosto inteiro. Emoção, intimidade.</div>
+          <div><strong class="text-emerald-400">Medium close-up:</strong> rosto + ombros. Diálogo padrão.</div>
+          <div><strong class="text-emerald-400">Medium shot:</strong> da cintura pra cima. Conversa, ação leve.</div>
+          <div><strong class="text-emerald-400">Cowboy shot:</strong> meio das coxas pra cima. Western, atitude.</div>
+          <div><strong class="text-emerald-400">Full body:</strong> corpo inteiro. Roupa, postura.</div>
+          <div><strong class="text-emerald-400">Wide shot:</strong> sujeito + ambiente significativo. Contexto.</div>
+          <div><strong class="text-emerald-400">Extreme wide shot:</strong> sujeito pequeno na paisagem. Solidão, escala.</div>
+          <div><strong class="text-emerald-400">Establishing shot:</strong> apresenta o local. Abertura de cena.</div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Exemplo bilíngue</h3>
+        <p class="text-neutral-400 text-sm mb-2">PT — Plano amplíssimo: mulher solitária caminhando num campo de trigo no horizonte, céu dominando o quadro.</p>
+        <pre class="bg-dark-900 rounded-lg p-4 text-sm text-emerald-400 overflow-x-auto"><code class="mono">extreme wide shot of a lone woman walking through a vast wheat field, horizon line low, sky dominating the frame, sense of isolation and scale</code></pre>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span>Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Lente carrega psicologia</strong><span class="text-neutral-400"> — 24mm imersivo, 50mm neutro, 85mm íntimo, 135mm cinema</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Abertura é decisão narrativa</strong><span class="text-neutral-400"> — rasa isola, ampla contextualiza</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Grão quebra o "plástico de IA"</strong><span class="text-neutral-400"> — sempre adicionar</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Luz tem 3 eixos</strong><span class="text-neutral-400"> — direção, qualidade, temperatura</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Ângulo é narrativa</strong><span class="text-neutral-400"> — eye-level é o que o modelo já dá; os outros precisam ser pedidos</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Distância é emoção</strong><span class="text-neutral-400"> — close = intimidade, wide = escala</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">1.3 — Linguagem cinematográfica (aspect ratio, color grading, diretores, filme)</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-1-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Prompt Director · INEMA.CLUB · 2026</p></div>
+  </footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle'),dIcon=document.getElementById('theme-toggle-dark-icon'),lIcon=document.getElementById('theme-toggle-light-icon'),html=document.documentElement;
+    if(localStorage.getItem('theme')==='light'){html.classList.remove('dark');dIcon.classList.remove('hidden');}else{lIcon.classList.remove('hidden');}
+    themeToggle.addEventListener('click',()=>{dIcon.classList.toggle('hidden');lIcon.classList.toggle('hidden');html.classList.toggle('dark');localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');});
+  </script>
+</body>
+</html>

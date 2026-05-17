@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Director | Imagens e Cinema com IA</title>
+  <meta name="description" content="Curso completo de prompts para imagens e vídeo com IA: fundamentos, técnicas, recursos avançados e biblioteca de receitas prontas — Midjourney, Sora, Veo, Runway, Flux, Seedance e muito mais.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode base */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de TODAS as trilhas */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-amber-400 { color: #92400e; }
+
+    /* Light mode - remove gradientes */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Navbar light */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    /* Glow halo no hero */
+    .halo {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(60% 50% at 50% 0%, rgba(250,204,21,0.10), transparent 60%),
+                  radial-gradient(40% 40% at 20% 80%, rgba(37,99,235,0.10), transparent 60%),
+                  radial-gradient(40% 40% at 80% 80%, rgba(124,58,237,0.10), transparent 60%);
+    }
+    html:not(.dark) .halo { display: none; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🎬</span>
+            <span class="font-bold text-lg hidden sm:inline">Prompt Director</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="curso/trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="curso/trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Técnicas</span>
+          </a>
+          <a href="curso/trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="curso/trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Receitas</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900"></div>
+    <div class="halo"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+      <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-6 border border-primary/40">CURSO COMPLETO · MAIO 2026</span>
+      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+        Vire o <span class="text-primary">diretor</span><br class="hidden sm:block">
+        do prompt visual.
+      </h1>
+      <p class="text-lg sm:text-xl text-neutral-300 max-w-3xl mb-8">
+        Domine a linguagem por trás de imagens e vídeos gerados por IA. Da gramática fotográfica aos parâmetros avançados de
+        <strong class="text-emerald-400">Midjourney</strong>, <strong class="text-blue-400">Sora 2</strong>, <strong class="text-purple-400">Veo 3</strong>, <strong class="text-amber-400">Runway Gen-4</strong>, Flux, Seedance, Kling, Nano Banana e mais — em português, com prompts bilíngues prontos pra colar.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 mb-12">
+        <a href="curso/trilha1/index.html" class="px-6 py-3 bg-primary text-dark-900 rounded-lg font-bold text-center hover:bg-yellow-300 transition-colors">Começar pela Trilha 1 →</a>
+        <a href="#trilhas" class="px-6 py-3 bg-dark-700 text-neutral-100 rounded-lg font-semibold text-center hover:bg-dark-600 transition-colors border border-dark-600">Ver todas as trilhas</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl">
+        <div class="bg-dark-800/60 rounded-lg p-4 border border-dark-600">
+          <div class="text-2xl font-bold text-emerald-400">4</div>
+          <div class="text-xs text-neutral-400">Trilhas</div>
+        </div>
+        <div class="bg-dark-800/60 rounded-lg p-4 border border-dark-600">
+          <div class="text-2xl font-bold text-blue-400">19</div>
+          <div class="text-xs text-neutral-400">Módulos</div>
+        </div>
+        <div class="bg-dark-800/60 rounded-lg p-4 border border-dark-600">
+          <div class="text-2xl font-bold text-purple-400">114</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/60 rounded-lg p-4 border border-dark-600">
+          <div class="text-2xl font-bold text-amber-400">+80</div>
+          <div class="text-xs text-neutral-400">Prompts prontos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESE -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4">A tese: prompt é direção de arte.</h2>
+        <p class="text-neutral-300 mb-4">Em 2026, qualquer pessoa com um navegador acessa motores de imagem e vídeo que, há dois anos, exigiriam um estúdio inteiro. O gargalo deixou de ser a ferramenta — passou a ser o <strong class="text-primary">briefing</strong>.</p>
+        <p class="text-neutral-300 mb-4">Quem entende lente, luz, montagem e cor escreve prompts que parecem cinema. Quem não entende, gera "imagem bonita" genérica que satura o feed.</p>
+        <p class="text-neutral-300">Este curso é o caminho do segundo grupo para o primeiro.</p>
+      </div>
+      <div class="bg-gradient-to-br from-primary/10 to-dark-800 rounded-xl border border-primary/40 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-4">O que você vai conseguir fazer</h3>
+        <ul class="space-y-3 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-primary mt-0.5">✦</span><span>Escrever um prompt único que vira <strong>still publicitário</strong> de qualidade profissional</span></li>
+          <li class="flex items-start space-x-2"><span class="text-primary mt-0.5">✦</span><span>Dirigir <strong>câmera, lente, luz e cor</strong> em palavras que o modelo entende</span></li>
+          <li class="flex items-start space-x-2"><span class="text-primary mt-0.5">✦</span><span>Manter <strong>personagem e locação consistentes</strong> em 20 cenas</span></li>
+          <li class="flex items-start space-x-2"><span class="text-primary mt-0.5">✦</span><span>Produzir <strong>cenas em vídeo</strong> com movimento controlado e loops perfeitos</span></li>
+          <li class="flex items-start space-x-2"><span class="text-primary mt-0.5">✦</span><span>Montar uma <strong>biblioteca pessoal</strong> de receitas pra reuso</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUEM -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Para quem é este curso</h2>
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <div class="text-3xl mb-3">📸</div>
+        <h3 class="font-semibold mb-2">Criadores de conteúdo</h3>
+        <p class="text-sm text-neutral-400">Quem precisa de assets visuais diários e não quer cair no visual genérico de IA.</p>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <div class="text-3xl mb-3">🎯</div>
+        <h3 class="font-semibold mb-2">Designers e diretores de arte</h3>
+        <p class="text-sm text-neutral-400">Profissionais que querem incorporar IA ao pipeline sem perder controle estético.</p>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <div class="text-3xl mb-3">🎥</div>
+        <h3 class="font-semibold mb-2">Realizadores e roteiristas</h3>
+        <p class="text-sm text-neutral-400">Quem está testando IA para storyboard, pré-viz, comerciais e curtas autorais.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRILHAS -->
+  <section id="trilhas" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-10">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">As 4 trilhas do Prompt Director</h2>
+      <p class="text-neutral-400 max-w-3xl">Comece pela T1 mesmo se já mexe com IA — ela define o vocabulário que vai voltar em todas as outras. Trilha 4 é biblioteca de consulta: copia, ajusta, usa.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- T1 Emerald -->
+      <a href="curso/trilha1/index.html" class="group bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 hover:border-emerald-400 transition-all">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/20 px-2 py-1 rounded">TRILHA 1</span>
+          <span class="text-xs text-neutral-500">5 módulos · ~4h</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">🟢 Fundamentos</h3>
+        <p class="text-neutral-400 text-sm mb-4">A gramática do prompt visual. Sujeito, lente, luz, composição, cor. Quem termina aqui já escreve prompts que funcionam.</p>
+        <ul class="text-sm text-neutral-300 space-y-1">
+          <li>• Anatomia de um prompt visual</li>
+          <li>• Linguagem fotográfica</li>
+          <li>• Linguagem cinematográfica</li>
+          <li>• Exercícios práticos</li>
+          <li>• Passo-a-passo: seu primeiro still</li>
+        </ul>
+      </a>
+
+      <!-- T2 Blue -->
+      <a href="curso/trilha2/index.html" class="group bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 hover:border-blue-400 transition-all">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-blue-400 bg-blue-500/20 px-2 py-1 rounded">TRILHA 2</span>
+          <span class="text-xs text-neutral-500">5 módulos · ~5h</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors">🔵 Técnicas</h3>
+        <p class="text-neutral-400 text-sm mb-4">Como controlar cada gerador. Parâmetros, pesos, sintaxe específica de MJ, Sora, Veo, Runway, Flux, Seedance, Kling, Nano Banana.</p>
+        <ul class="text-sm text-neutral-300 space-y-1">
+          <li>• Parâmetros e sintaxe (todas as ferramentas)</li>
+          <li>• Controle de composição</li>
+          <li>• Movimento e câmera em vídeo</li>
+          <li>• Exercícios práticos</li>
+          <li>• Passo-a-passo: clip de 10 segundos</li>
+        </ul>
+      </a>
+
+      <!-- T3 Purple -->
+      <a href="curso/trilha3/index.html" class="group bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 hover:border-purple-400 transition-all">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-purple-400 bg-purple-500/20 px-2 py-1 rounded">TRILHA 3</span>
+          <span class="text-xs text-neutral-500">5 módulos · ~5h</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 group-hover:text-purple-400 transition-colors">🟣 Avançado</h3>
+        <p class="text-neutral-400 text-sm mb-4">Workflows profissionais. Consistência de personagem, storyboard, pipeline híbrido IA + foto real, finalização, entrega.</p>
+        <ul class="text-sm text-neutral-300 space-y-1">
+          <li>• Direção de arte com IA</li>
+          <li>• Storytelling em sequência</li>
+          <li>• Pipeline híbrido (IA + AE/Premiere)</li>
+          <li>• Exercícios práticos</li>
+          <li>• Passo-a-passo: 3 cenas coerentes</li>
+        </ul>
+      </a>
+
+      <!-- T4 Amber -->
+      <a href="curso/trilha4/index.html" class="group bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 hover:border-amber-400 transition-all">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-amber-400 bg-amber-500/20 px-2 py-1 rounded">TRILHA 4</span>
+          <span class="text-xs text-neutral-500">4 módulos · biblioteca</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 group-hover:text-amber-400 transition-colors">🟡 Receitas Prontas</h3>
+        <p class="text-neutral-400 text-sm mb-4">Biblioteca copy-paste. Propaganda, cinema, animação, casos especiais — cada tópico é um prompt completo com variações.</p>
+        <ul class="text-sm text-neutral-300 space-y-1">
+          <li>• Propaganda e produto</li>
+          <li>• Cinema e curta-metragem</li>
+          <li>• Animação e desenho</li>
+          <li>• Casos especiais (Reels, capas, pôsteres)</li>
+        </ul>
+      </a>
+    </div>
+  </section>
+
+  <!-- FERRAMENTAS COBERTAS -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-center">Ferramentas cobertas (estado da arte · maio/2026)</h2>
+    <p class="text-neutral-400 text-center mb-8">Cada técnica é mostrada de forma genérica, e depois aplicada na ferramenta mais relevante pro caso.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 text-sm">
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-emerald-400">Midjourney v7</strong><div class="text-neutral-400 text-xs mt-1">Estilo, sref, moodboards</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-blue-400">Sora 2</strong><div class="text-neutral-400 text-xs mt-1">Vídeo longo com áudio</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-blue-400">Veo 3</strong><div class="text-neutral-400 text-xs mt-1">Vídeo cinematográfico</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-purple-400">Runway Gen-4</strong><div class="text-neutral-400 text-xs mt-1">Referência + controle</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-amber-400">Flux 1.1 / Kontext</strong><div class="text-neutral-400 text-xs mt-1">Texto fiel, edição</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-emerald-400">Nano Banana</strong><div class="text-neutral-400 text-xs mt-1">Edição conversacional</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-purple-400">Seedance 2</strong><div class="text-neutral-400 text-xs mt-1">Loops perfeitos</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-blue-400">Kling 2.5</strong><div class="text-neutral-400 text-xs mt-1">Movimento humano</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-amber-400">Ideogram 3</strong><div class="text-neutral-400 text-xs mt-1">Tipografia em imagem</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-purple-400">Luma Ray 2</strong><div class="text-neutral-400 text-xs mt-1">Câmera 3D coerente</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-emerald-400">Higgsfield</strong><div class="text-neutral-400 text-xs mt-1">Câmera cinemática</div></div>
+      <div class="bg-dark-800 rounded-lg border border-dark-600 p-4"><strong class="text-blue-400">Adobe Firefly</strong><div class="text-neutral-400 text-xs mt-1">Brand safe / integração</div></div>
+    </div>
+  </section>
+
+  <!-- INEMA -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-8 text-center">
+      <h2 class="text-2xl font-bold mb-3">Por que o <span class="text-sky-400">INEMA</span>?</h2>
+      <p class="text-neutral-400 max-w-2xl mx-auto mb-4">INEMA.CLUB é o nosso laboratório de cursos práticos em IA, automação e criação visual. Aqui você não recebe palestras — você sai com prompts, fluxos e arquivos prontos.</p>
+      <a href="https://inema.club" target="_blank" class="inline-block px-5 py-2.5 bg-sky-500/20 text-sky-400 border border-sky-500/30 rounded-lg font-semibold hover:bg-sky-500/30 transition-colors">Conhecer o INEMA.CLUB →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-10 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p class="mb-2">Prompt Director — Imagens e Cinema com IA · 2026</p>
+      <p>Um curso <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const dIcon = document.getElementById('theme-toggle-dark-icon');
+    const lIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') { html.classList.remove('dark'); dIcon.classList.remove('hidden'); }
+    else { lIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      dIcon.classList.toggle('hidden'); lIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
